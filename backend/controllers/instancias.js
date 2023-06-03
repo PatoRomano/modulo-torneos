@@ -13,7 +13,7 @@ const getItems = async (req, res) => {
 }
 
 
-const getItem = async (req, res) => {
+/* const getItem = async (req, res) => {
 
     const { id } = req.params;
 
@@ -81,6 +81,7 @@ const deleteItem = async (req, res) => {
 
     res.send({ instancia });
 
-}
+} */
 
-module.exports = { getItems, getItem, createItem, updateItem, deleteItem }
+//module.exports = { getItems, getItem, createItem, updateItem, deleteItem }
+module.exports = { getItems }
