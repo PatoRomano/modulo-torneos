@@ -57,7 +57,9 @@ const updateItem = async (req, res) => {
     const { id } = req.params;
     const { body } = req;
 
-    const deporte = await Deporte.update(
+    const deporte = await Deporte.findByPk(id)
+
+    await deporte.update(
         { nombre: body.nombre },
         { where: { id: id } }
     );
@@ -79,9 +81,10 @@ const updateItem = async (req, res) => {
 const deleteItem = async (req, res) => {
     const { id } = req.params;
 
-    const deporte = await Deporte.update(
+    const deporte = await Deporte.findByPk(id)
+
+    await deporte.update(
         { activo: 0 },
-        { where: { id: id } }
     );
 
     if (!deporte) {
