@@ -4,6 +4,7 @@ const models = {
     Instancia: require('./instancias'),
     Equipo: require('./equipos'),
     Jugador: require('./jugadores'),
+    Partido: require('./partidos'),
 }
 
 module.exports = models

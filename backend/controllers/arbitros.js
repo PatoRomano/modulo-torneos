@@ -73,7 +73,9 @@ const updateItem = async (req, res) => {
             nombre: body.nombre,
             apellido: body.apellido,
         },
-        { where: { id: id } }
+        { 
+            where: { id: id }
+        }
     );
 
     if (!arbitro) {
