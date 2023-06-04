@@ -82,22 +82,38 @@ const updateItem = async (req, res) => {
 * @param {*} req
 * @param {*} res
 */
-const deleteItem = async (req, res) => {
+const changeStateItem = async (req, res, active, enabled) => {
     const { id } = req.params;
 
     const arbitro = await Arbitro.findByPk(id)
-
-    await arbitro.update(
-        { activo: 0, disponible: 0 },
-        { where: { id: id } }
-    );
 
     if (!arbitro) {
         return res.send({ error: "No existe ese arbitro" });
     }
 
+    if (active == 1 && enabled == 0 && arbitro.activo == 0) {
+        return res.send({ error: "No se puede desactivar ese arbitro" });
+    }
+
+    await arbitro.update(
+        { activo: active, disponible: enabled },
+        { where: { id: id } }
+    );
+
     res.send({ arbitro });
 
 }
 
-module.exports = { getItems, getItem, createItem, updateItem, deleteItem }
+const deleteItem = async (req, res) => {
+    await changeStateItem(req, res, 0, 0);
+}
+
+const activateItem = async (req, res) => {
+    await changeStateItem(req, res, 1, 1);
+}
+
+const deactivateItem = async (req, res) => {
+    await changeStateItem(req, res, 1, 0);
+}
+
+module.exports = { getItems, getItem, createItem, updateItem, deleteItem, activateItem, deactivateItem }

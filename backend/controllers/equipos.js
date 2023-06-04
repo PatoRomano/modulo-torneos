@@ -1,4 +1,4 @@
-const { Deporte } = require('../models');
+const { Equipo } = require('../models');
 
 /** 
 *   Obtener lista BD
@@ -7,9 +7,9 @@ const { Deporte } = require('../models');
 */
 const getItems = async (req, res) => {
 
-    const deportes = await Deporte.findAll({});
+    const equipos = await Equipo.findAll({});
 
-    res.send({ deportes });
+    res.send({ equipos });
 
 }
 
@@ -22,13 +22,13 @@ const getItem = async (req, res) => {
 
     const { id } = req.params;
 
-    const deporte = await Deporte.findByPk(id);
+    const equipo = await Equipo.findByPk(id);
 
-    if (!deporte) {
-        return res.send({ error: "No existe ese deporte" });
+    if (!equipo) {
+        return res.send({ error: "No existe ese equipo" });
     }
 
-    res.send({ deporte });
+    res.send({ equipo });
 
 }
 
@@ -42,8 +42,8 @@ const createItem = async (req, res) => {
 
     const { body } = req;
 
-    const deporte = await Deporte.create(body);
-    res.send({ deporte })
+    const equipo = await Equipo.create(body);
+    res.send({ equipo })
 
 }
 
@@ -57,38 +57,39 @@ const updateItem = async (req, res) => {
     const { id } = req.params;
     const { body } = req;
 
-    const deporte = await Deporte.findByPk(id)
+    const equipo = await Equipo.findByPk(id)
 
-    await deporte.update(
+    await equipo.update(
         { nombre: body.nombre },
         { where: { id: id } }
     );
 
-    if (!deporte) {
-        return res.send({ error: "No existe ese deporte" });
+    if (!equipo) {
+        return res.send({ error: "No existe ese equipo" });
     }
 
-    res.send({ deporte });
+    res.send({ equipo });
 
 }
+
 
 
 
 const changeStateItem = async (req, res, active) => {
     const { id } = req.params;
 
-    const deporte = await Deporte.findByPk(id)
+    const equipo = await Equipo.findByPk(id)
 
-    if (!deporte) {
-        return res.send({ error: "No existe ese deporte" });
+    if (!equipo) {
+        return res.send({ error: "No existe ese equipo" });
     }
 
-    await deporte.update(
+    await equipo.update(
         { activo: active },
         { where: { id: id } }
     );
 
-    res.send({ deporte });
+    res.send({ equipo });
 
 }
 
@@ -99,5 +100,6 @@ const deleteItem = async (req, res) => {
 const activateItem = async (req, res) => {
     await changeStateItem(req, res, 1);
 }
+
 
 module.exports = { getItems, getItem, createItem, updateItem, deleteItem, activateItem }
