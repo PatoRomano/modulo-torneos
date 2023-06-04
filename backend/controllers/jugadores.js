@@ -40,9 +40,18 @@ const getItem = async (req, res) => {
 */
 const createItem = async (req, res) => {
 
+    // Verificar si ya existe el dni para todos los casos con DNI
+
     const { body } = req;
 
-    const jugador = await Jugador.create(body);
+    const jugador = await Jugador.findAll({ 
+        where: { dni: body.dni } 
+    });
+
+    if (jugador) {
+        return res.send({ error: "Ya existe un jugador con ese DNI" })
+    }
+    jugador = await Jugador.create(body);
     res.send({ jugador })
 
 }
