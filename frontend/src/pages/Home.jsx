@@ -14,13 +14,17 @@ import ImagePaddle from '../assets/paddle.jpg';
 import imgBg from '../assets/world-cup-original.jpg';
 
 function App() {
-    const [deportes, setDeportes] = useState(null)
+    const [deportes, setDeportes] = useState([])
+    const [deportesFiltrados, setDeportesFiltrados] = useState([])
 
     const fetchDeportes = async () => {
         const response = await fetch('http://localhost:3001/api/deportes/')
         const json = await response.json()
         if (response.ok) {
             setDeportes(json.deportes)
+
+            const itemsFiltrados = json.deportes.filter((item) => item.activo === 1);
+            setDeportesFiltrados(itemsFiltrados);
         }
     }
 
@@ -34,7 +38,7 @@ function App() {
             <Hero imageSrc={imgBg} title="Crea torneos de cualquier deporte." />
             <MainTitle title="Elige tu deporte!" />
 
-            {deportes && Array.isArray(deportes) && deportes.map((deporte) => (
+            {deportesFiltrados && Array.isArray(deportesFiltrados) && deportesFiltrados.map((deporte) => (
                 <Card key={deporte.id} title={deporte.nombre_publico} imageSrc={deporte.nombre==="futbol"?ImageSoccer:deporte.nombre==="paddle"?ImagePaddle:ImageHandball}/>
             ))}
 
