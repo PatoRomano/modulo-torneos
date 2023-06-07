@@ -5,6 +5,7 @@ const models = {
     Equipo: require('./equipos'),
     Jugador: require('./jugadores'),
     Partido: require('./partidos'),
+    Torneo: require('./torneos'),
 }
 
 module.exports = models

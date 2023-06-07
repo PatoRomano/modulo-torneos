@@ -62,15 +62,8 @@ const updateItem = async (req, res) => {
     const partido = await Partido.findByPk(id)
 
     await partido.update(
-        {
-            nombre: body.nombre,
-            deporte_id: body.deporte_id,
-            arbitro_id: body.arbitro_id,
-            ganador_id: body.ganador_id,
-            instancia_id: body.instancia_id,
-            terminado: body.terminado,
-        },
-        { where: { id: id } }
+        body,
+        { where: { id: id } },
     );
 
     if (!partido) {

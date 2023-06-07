@@ -1,29 +1,26 @@
 const DataTypes = require("sequelize");
 const { sequelize } = require("../config/mysql");
 
-const Partido = sequelize.define(
-    "partidos",
+const Torneo = sequelize.define(
+    "torneos",
     {
-        torneo_id: {
+        nombre: {
+            type: DataTypes.STRING,
+        },
+        deporte_id: {
             type: DataTypes.INTEGER,
         },
-        llave_id: {
+        arbitro_id: {
             type: DataTypes.INTEGER,
         },
-        equipo_uno_id: {
+        ganador_id: {
             type: DataTypes.INTEGER,
         },
-        equipo_dos_id: {
+        instancia_id: {
             type: DataTypes.INTEGER,
         },
-        goles_equipo_uno: {
+        terminado: {
             type: DataTypes.INTEGER,
-        },
-        goles_equipo_dos: {
-            type: DataTypes.INTEGER,
-        },
-        fecha: {
-            type: DataTypes.DATE,
         },
         activo: {
             type: DataTypes.INTEGER,
@@ -34,4 +31,4 @@ const Partido = sequelize.define(
     }
 );
 
-module.exports = Partido;
+module.exports = Torneo;
