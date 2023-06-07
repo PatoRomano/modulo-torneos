@@ -7,6 +7,9 @@ const Deporte = sequelize.define(
         nombre: {
             type: DataTypes.STRING,
         },
+        nombre_publico: {
+            type: DataTypes.STRING,
+        },
         activo: {
             type: DataTypes.INTEGER,
         },

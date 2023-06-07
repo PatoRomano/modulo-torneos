@@ -55,14 +55,7 @@ const updateItem = async (req, res) => {
     const torneo = await Torneo.findByPk(id)
 
     await torneo.update(
-        {
-            nombre: body.nombre,
-            deporte_id: body.deporte_id,
-            arbitro_id: body.arbitro_id,
-            ganador_id: body.ganador_id,
-            instancia_id: body.instancia_id,
-            terminado: body.terminado,
-        },
+        body,
         { where: { id: id } }
     );
 

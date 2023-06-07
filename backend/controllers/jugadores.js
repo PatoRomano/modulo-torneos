@@ -69,13 +69,7 @@ const updateItem = async (req, res) => {
     const jugador = await Jugador.findByPk(id)
 
     await jugador.update(
-        {
-            dni: body.dni,
-            nombre: body.nombre,
-            apellido: body.apellido,
-            fecha_nac: body.fecha_nac,
-            equipo_id: body.equipo_id,
-        },
+        body,
         { where: { id: id } }
     );
 

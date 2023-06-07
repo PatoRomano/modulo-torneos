@@ -60,7 +60,7 @@ const updateItem = async (req, res) => {
     const deporte = await Deporte.findByPk(id)
 
     await deporte.update(
-        { nombre: body.nombre },
+        body,
         { where: { id: id } }
     );
 

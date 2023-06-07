@@ -68,11 +68,7 @@ const updateItem = async (req, res) => {
     const arbitro = await Arbitro.findByPk(id)
 
     await arbitro.update(
-        {
-            dni: body.dni,
-            nombre: body.nombre,
-            apellido: body.apellido,
-        },
+        body,
         { 
             where: { id: id }
         }
