@@ -1,5 +1,6 @@
-import React from 'react';
+import { React, useContext, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { DataContext } from '../context/DataContext';
 
 //Components
 import Card from '../components/Card';
@@ -15,6 +16,13 @@ import ImageFairPlay from '../assets/sedes/fairplay.jpg';
 import imgBg from '../assets/principales/world-cup-original.jpg';
 
 function App() {
+    const { jsonData, updateJsonData } = useContext(DataContext);
+    const handleClick = (elem) => {
+        const newData = { deporte: jsonData.deporte, sede: elem };
+        updateJsonData(newData);
+    };
+
+    // NAVIGATE PARA BOTON VOLVER ATRAS
     const history = useNavigate()
 
     const sedes = [
@@ -37,11 +45,15 @@ function App() {
         }, []) 
     */
 
+    useEffect(() => {
+        console.log(jsonData)
+    }, [])
+
 
     return (
         <div>
             <Hero imageSrc={imgBg} title="Crea torneos de cualquier deporte." />
-            <ButtonBack onClick={() => history(-1)}/>
+            <ButtonBack onClick={() => history(-1)} />
             <MainTitle title="Elige tu sede!" />
 
             {sedes && Array.isArray(sedes) && sedes.map((sede) => (

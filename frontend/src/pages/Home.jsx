@@ -1,6 +1,7 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { DataContext } from '../context/DataContext';
 
 //Components
 import Card from '../components/Card';
@@ -15,9 +16,18 @@ import ImagePaddle from '../assets/deportes/paddle.jpg';
 import imgBg from '../assets/principales/world-cup-original.jpg';
 
 function App() {
+
     const [deportes, setDeportes] = useState([])
     const [deportesFiltrados, setDeportesFiltrados] = useState([])
 
+    const { jsonData, updateJsonData } = useContext(DataContext);
+
+    const handleClick = (elem) => {
+        const newData = { deporte: elem };
+        updateJsonData(newData);
+    };
+
+    // TRAER LOS DEPORTES
     const fetchDeportes = async () => {
         const response = await fetch('http://localhost:3001/api/deportes/')
         const json = await response.json()
@@ -40,7 +50,7 @@ function App() {
             <MainTitle title="Elige tu deporte!" />
 
             {deportesFiltrados && Array.isArray(deportesFiltrados) && deportesFiltrados.map((deporte) => (
-                <Link to={"/" + deporte.nombre}>
+                <Link to={"/" + deporte.nombre} onClick={() => handleClick(deporte.nombre)}>
                     <Card key={deporte.id} title={deporte.nombre_publico} imageSrc={deporte.nombre === "futbol" ? ImageSoccer : deporte.nombre === "paddle" ? ImagePaddle : ImageHandball} />
                 </Link>
             ))}
