@@ -21,6 +21,14 @@ function App() {
               path="/futbol"
               element={<Sedes />}
             />
+            <Route
+              path="/paddle"
+              element={<Sedes />}
+            />
+            <Route
+              path="/handball"
+              element={<Sedes />}
+            />
           </Routes>
       </BrowserRouter>
     </div>

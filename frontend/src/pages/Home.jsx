@@ -15,7 +15,7 @@ import ImagePaddle from '../assets/deportes/paddle.jpg';
 
 import imgBg from '../assets/principales/world-cup-original.jpg';
 
-function App() {
+const Home = () => {
 
     const [deportes, setDeportes] = useState([])
     const [deportesFiltrados, setDeportesFiltrados] = useState([])
@@ -59,4 +59,4 @@ function App() {
     )
 }
 
-export default App
+export default Home
