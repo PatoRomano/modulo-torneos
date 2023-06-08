@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 //Components
 import Card from '../components/Card';
@@ -7,11 +8,11 @@ import MainTitle from '../components/MainTitle';
 import Hero from '../components/Hero';
 
 //Images
-import ImageSoccer from '../assets/soccer.jpg';
-import ImageHandball from '../assets/handball.jpg';
-import ImagePaddle from '../assets/paddle.jpg';
+import ImageSoccer from '../assets/deportes/soccer.jpg';
+import ImageHandball from '../assets/deportes/handball.jpg';
+import ImagePaddle from '../assets/deportes/paddle.jpg';
 
-import imgBg from '../assets/world-cup-original.jpg';
+import imgBg from '../assets/principales/world-cup-original.jpg';
 
 function App() {
     const [deportes, setDeportes] = useState([])
@@ -39,7 +40,9 @@ function App() {
             <MainTitle title="Elige tu deporte!" />
 
             {deportesFiltrados && Array.isArray(deportesFiltrados) && deportesFiltrados.map((deporte) => (
-                <Card key={deporte.id} title={deporte.nombre_publico} imageSrc={deporte.nombre==="futbol"?ImageSoccer:deporte.nombre==="paddle"?ImagePaddle:ImageHandball}/>
+                <Link to={"/" + deporte.nombre}>
+                    <Card key={deporte.id} title={deporte.nombre_publico} imageSrc={deporte.nombre === "futbol" ? ImageSoccer : deporte.nombre === "paddle" ? ImagePaddle : ImageHandball} />
+                </Link>
             ))}
 
         </div>
