@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 //Components
 import Card from '../components/Card';
 import MainTitle from '../components/MainTitle';
 import Hero from '../components/Hero';
+import ButtonBack from "../components/ButtonBack"
 
 //Images
 import ImageVasXMas from '../assets/sedes/vasxmas.jpg';
@@ -14,6 +15,8 @@ import ImageFairPlay from '../assets/sedes/fairplay.jpg';
 import imgBg from '../assets/principales/world-cup-original.jpg';
 
 function App() {
+    const history = useNavigate()
+
     const sedes = [
         { id: 1, nombre: 'vasxmas', nombre_publico: "Vas x Mas", activo: 1 },
         { id: 2, nombre: 'lacanchita', nombre_publico: "La Canchita", activo: 1 },
@@ -38,6 +41,7 @@ function App() {
     return (
         <div>
             <Hero imageSrc={imgBg} title="Crea torneos de cualquier deporte." />
+            <ButtonBack onClick={() => history(-1)}/>
             <MainTitle title="Elige tu sede!" />
 
             {sedes && Array.isArray(sedes) && sedes.map((sede) => (

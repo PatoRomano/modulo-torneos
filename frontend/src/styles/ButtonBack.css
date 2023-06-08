@@ -1,0 +1,10 @@
+.button-back {
+    font-size: 24px;
+    margin-left: 25rem;
+    margin-top: 5rem;
+    width: 150px;
+    height: 60px;
+    border-radius: 10px;
+    color: wheat;
+    background-color: #333333;
+}
