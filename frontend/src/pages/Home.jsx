@@ -50,7 +50,7 @@ function App() {
             <MainTitle title="Elige tu deporte!" />
 
             {deportesFiltrados && Array.isArray(deportesFiltrados) && deportesFiltrados.map((deporte) => (
-                <Link to={"/" + deporte.nombre} onClick={() => handleClick(deporte.nombre)}>
+                <Link to={"/" + deporte.nombre} onClick={() => handleClick(deporte.nombre)} className='card-link'>
                     <Card key={deporte.id} title={deporte.nombre_publico} imageSrc={deporte.nombre === "futbol" ? ImageSoccer : deporte.nombre === "paddle" ? ImagePaddle : ImageHandball} />
                 </Link>
             ))}

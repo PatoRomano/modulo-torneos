@@ -178,3 +178,15 @@ div.error {
   border-radius: 4px;
   margin: 20px 0;
 }
+
+.card-link {
+  text-decoration: none;
+}
+
+.card-link:hover {
+  color:inherit;
+}
+
+.card-link:visited {
+  color:inherit;
+}

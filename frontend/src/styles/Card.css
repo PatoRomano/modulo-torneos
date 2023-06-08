@@ -25,6 +25,8 @@
 
 .card-content h1 {
     margin-left: 2rem;
+    text-decoration: none;
+
 }
 
 .card-content p {
