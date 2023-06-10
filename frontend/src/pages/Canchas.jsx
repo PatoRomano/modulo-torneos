@@ -28,7 +28,6 @@ const Canchas = () => {
     const canchas = [
         { id: 1, nombre: 'futbolcinco', nombre_publico: "Futbol 5", activo: 1 },
         { id: 2, nombre: 'futbolsiete', nombre_publico: "Futbol 7", activo: 1 },
-        { id: 3, nombre: 'futbolonce', nombre_publico: "Futbol 11", activo: 1 },
     ];
     /* 
         const fetchDeportes = async () => {
@@ -57,7 +56,9 @@ const Canchas = () => {
             <MainTitle title="Elige el tipo de cancha" />
 
             {canchas && Array.isArray(canchas) && canchas.map((cancha) => (
-                <Card key={cancha.id} title={cancha.nombre_publico} imageSrc={cancha.nombre === "vasxmas" ? ImageVasXMas : cancha.nombre === "lacanchita" ? ImageCanchita : ImageFairPlay} />
+                <Link to={"/espacios"} onClick={() => handleClick(cancha.nombre)} className='card-link'>
+                    <Card key={cancha.id} title={cancha.nombre_publico} imageSrc={ImageFairPlay} />
+                </Link>
             ))}
 
         </div>
