@@ -5,29 +5,26 @@ import React from 'react'
 import Home from './pages/Home.jsx'
 import Sedes from './pages/Sedes.jsx'
 import Navbar from './components/Navbar.jsx'
+import Canchas from './pages/Canchas.jsx'
 
 function App() {
 
   return (
     <div>
       <BrowserRouter>
-        <Navbar />
+        <Navbar /> 
           <Routes>
             <Route
               path="/"
               element={<Home />}
             />
             <Route
-              path="/futbol"
+              path="/sedes"
               element={<Sedes />}
             />
             <Route
-              path="/paddle"
-              element={<Sedes />}
-            />
-            <Route
-              path="/handball"
-              element={<Sedes />}
+              path="/canchas"
+              element={<Canchas />}
             />
           </Routes>
       </BrowserRouter>

@@ -1,5 +1,5 @@
 import { React, useContext, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
 
 //Components
@@ -16,6 +16,7 @@ import ImageFairPlay from '../assets/sedes/fairplay.jpg';
 import imgBg from '../assets/principales/world-cup-original.jpg';
 
 const Sedes = () => {
+    // CONTEXTO
     const { jsonData, updateJsonData } = useContext(DataContext);
     const handleClick = (elem) => {
         const newData = { deporte: jsonData.deporte, sede: elem };
@@ -25,11 +26,17 @@ const Sedes = () => {
     // NAVIGATE PARA BOTON VOLVER ATRAS
     const history = useNavigate()
 
+    //SEDES
     const sedes = [
         { id: 1, nombre: 'vasxmas', nombre_publico: "Vas x Mas", activo: 1 },
         { id: 2, nombre: 'lacanchita', nombre_publico: "La Canchita", activo: 1 },
         { id: 3, nombre: 'fairplay', nombre_publico: "Fair Play", activo: 1 },
     ];
+
+
+    //use Params
+    const { id } = useParams();
+
     /* 
         const fetchDeportes = async () => {
             const response = await fetch('http://localhost:3001/api/deportes/')
@@ -57,7 +64,9 @@ const Sedes = () => {
             <MainTitle title="Elige tu sede!" />
 
             {sedes && Array.isArray(sedes) && sedes.map((sede) => (
-                <Card key={sede.id} title={sede.nombre_publico} imageSrc={sede.nombre === "vasxmas" ? ImageVasXMas : sede.nombre === "lacanchita" ? ImageCanchita : ImageFairPlay} />
+                <Link to={"/canchas"} onClick={() => handleClick(sede.nombre)} className='card-link'>
+                    <Card key={sede.id} title={sede.nombre_publico} imageSrc={sede.nombre === "vasxmas" ? ImageVasXMas : sede.nombre === "lacanchita" ? ImageCanchita : ImageFairPlay} />
+                </Link>
             ))}
 
         </div>
