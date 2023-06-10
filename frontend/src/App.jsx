@@ -7,6 +7,7 @@ import Sedes from './pages/Sedes.jsx'
 import Navbar from './components/Navbar.jsx'
 import Canchas from './pages/Canchas.jsx'
 import Espacios from './pages/Espacios.jsx'
+import Instancias from './pages/Instancias.jsx'
 
 function App() {
 
@@ -30,6 +31,10 @@ function App() {
           <Route
             path="/espacios"
             element={<Espacios />}
+          />
+          <Route
+            path="/instancias"
+            element={<Instancias />}
           />
         </Routes>
       </BrowserRouter>
