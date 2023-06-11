@@ -17,8 +17,8 @@ import imgBg from '../assets/principales/world-cup-original.jpg';
 
 const Espacios = () => {
     const { jsonData, updateJsonData } = useContext(DataContext);
-    const handleClick = (elem) => {
-        const newData = { deporte: jsonData.deporte, sede: jsonData.sede, cancha: jsonData.cancha, espacio: elem };
+    const handleClick = (elem, elem1) => {
+        const newData = { deporte: jsonData.deporte, sede: jsonData.sede, cancha: jsonData.cancha, espacio: elem, nombreEspacio: elem1 };
         updateJsonData(newData);
     };
 
@@ -63,7 +63,7 @@ const Espacios = () => {
             <MainTitle title="Elige el espacio especifico" />
 
             {espaciosFiltrados && Array.isArray(espaciosFiltrados) && espaciosFiltrados.map((espacio) => (
-                <Link to={"/instancias"} onClick={() => handleClick(espacio.id)} className='card-link'>
+                <Link to={"/instancias"} onClick={() => handleClick(espacio.id, espacio.nombre_publico)} className='card-link'>
                     <Card key={espacio.id} title={espacio.nombre_publico} imageSrc={ImageFairPlay} />
                 </Link>
             ))}

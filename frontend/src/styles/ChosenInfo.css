@@ -1,0 +1,17 @@
+.text-info {
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-left: 25rem;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+.main-info {
+    font-weight: bold;
+}
+
+.info {
+    font-weight: light;
+}

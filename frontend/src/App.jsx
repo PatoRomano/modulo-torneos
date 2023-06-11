@@ -8,6 +8,7 @@ import Navbar from './components/Navbar.jsx'
 import Canchas from './pages/Canchas.jsx'
 import Espacios from './pages/Espacios.jsx'
 import Instancias from './pages/Instancias.jsx'
+import Dias from './pages/Dias.jsx'
 
 function App() {
 
@@ -35,6 +36,10 @@ function App() {
           <Route
             path="/instancias"
             element={<Instancias />}
+          />
+          <Route
+            path="/dias"
+            element={<Dias />}
           />
         </Routes>
       </BrowserRouter>

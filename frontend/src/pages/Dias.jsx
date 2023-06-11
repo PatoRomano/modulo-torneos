@@ -14,8 +14,9 @@ import ImageCanchita from '../assets/sedes/lacanchita.jpg';
 import ImageFairPlay from '../assets/sedes/fairplay.jpg';
 
 import imgBg from '../assets/principales/world-cup-original.jpg';
+import ChosenInfo from '../components/ChosenInfo';
 
-const Instancias = () => {
+const Dias = () => {
     const { jsonData, updateJsonData } = useContext(DataContext);
     const handleClick = (elem) => {
         const newData = { deporte: jsonData.deporte, sede: jsonData.sede, cancha: jsonData.cancha, espacio: jsonData.espacio, nombreEspacio: jsonData.nombreEspacio, instancia: elem };
@@ -25,25 +26,27 @@ const Instancias = () => {
     // NAVIGATE PARA BOTON VOLVER ATRAS
     const history = useNavigate()
 
-    const [instancias, setInstancias] = useState([])
-    const [instanciasFiltradas, setInstanciasFiltradas] = useState([])
+    //const [dias, setDias] = useState([])
+    //const [diasFiltrados, setDiasFiltrados] = useState([])
 
 
-    const fetchDeportes = async () => {
-        const response = await fetch('http://localhost:3001/api/instancias/')
+/*     const fetchDeportes = async () => {
+        const response = await fetch('http://localhost:3001/api/dias/')
         const json = await response.json()
         if (response.ok) {
-            setInstancias(json.instancias)
+            setDias(json.dias)
 
-            const itemsFiltrados = json.instancias.filter((item) => item.nombre != 'final');
-            setInstanciasFiltradas(itemsFiltrados);
+            const itemsFiltrados = json.dias.filter((item) => item.nombre != 'final');
+            setDiasFiltradas(itemsFiltrados);
         }
     }
+ */
+
 
     useEffect(() => {
         console.log(jsonData)
 
-        fetchDeportes();
+        //fetchDeportes();
     }, [])
 
 
@@ -51,16 +54,11 @@ const Instancias = () => {
         <div>
             <Hero imageSrc={imgBg} title="Crea torneos de cualquier deporte." />
             <ButtonBack onClick={() => history(-1)} />
-            <MainTitle title="Elige el tipo de torneo" />
-
-            {instanciasFiltradas && Array.isArray(instanciasFiltradas) && instanciasFiltradas.map((instancia) => (
-                <Link to='/dias' onClick={() => handleClick(instancia.nombre)} className='card-link'>
-                    <Card key={instancia.id} title={instancia.nombre_publico} imageSrc={ImageFairPlay} />
-                </Link>
-            ))}
+            <ChosenInfo precioJugador='1500' precioArbitro='500'/>
+            <MainTitle title="Elige los dias y horarios" />
 
         </div>
     )
 }
 
-export default Instancias
+export default Dias
