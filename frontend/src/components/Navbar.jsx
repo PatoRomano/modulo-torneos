@@ -12,6 +12,14 @@ const Navbar = () => {
         <span className="title-match">Match</span>
       </h1>
       </Link>
+      <ul className="navbar-list">
+        <li className="navbar-item">
+          <Link to="/" className="navbar-link">Inicio</Link>
+        </li>
+        <li className="navbar-item">
+          <Link to="/" className="navbar-link">Administrador</Link>
+        </li>
+      </ul>
     </nav>
   );
 };

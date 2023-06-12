@@ -14,6 +14,7 @@ import ImageHandball from '../assets/deportes/handball.jpg';
 import ImagePaddle from '../assets/deportes/paddle.jpg';
 
 import imgBg from '../assets/principales/world-cup-original.jpg';
+import FloatingIcons from '../components/FloatingIcons';
 
 const Home = () => {
 
@@ -48,6 +49,7 @@ const Home = () => {
         <div>
             <Hero imageSrc={imgBg} title="Crea torneos de cualquier deporte." />
             <MainTitle title="Elige tu deporte!" />
+            <FloatingIcons/>
 
             {deportesFiltrados && Array.isArray(deportesFiltrados) && deportesFiltrados.map((deporte) => (
                 <Link to={"/sedes"} onClick={() => handleClick(deporte.nombre)} className='card-link'>

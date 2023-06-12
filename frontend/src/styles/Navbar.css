@@ -15,6 +15,7 @@
 .navbar-title {
     display: flex;
     align-items: center;
+    margin-left: 25rem;
 }
 
 .title-sports {
@@ -25,3 +26,23 @@
     color: #ffd700;
 }
 
+.navbar-list {
+    font-size: 20px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    margin-right: 25rem;
+}
+
+.navbar-item {
+    margin-right: 2rem;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+}
