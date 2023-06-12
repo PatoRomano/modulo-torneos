@@ -3,7 +3,9 @@ import '../styles/ButtonBack.css';
 
 const ButtonBack = ({ onClick }) => {
     return (
-        <button className="button-back" onClick={onClick}>Volver</button>
+        <div className="btn-back-container">
+            <button className="button-back" onClick={onClick}>Volver</button>
+        </div>
     );
 }
 

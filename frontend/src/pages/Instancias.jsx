@@ -5,7 +5,6 @@ import { DataContext } from '../context/DataContext';
 //Components
 import Card from '../components/Card';
 import MainTitle from '../components/MainTitle';
-import Hero from '../components/Hero';
 import ButtonBack from "../components/ButtonBack"
 
 //Images
@@ -13,7 +12,6 @@ import ImageVasXMas from '../assets/sedes/vasxmas.jpg';
 import ImageCanchita from '../assets/sedes/lacanchita.jpg';
 import ImageFairPlay from '../assets/sedes/fairplay.jpg';
 
-import imgBg from '../assets/principales/world-cup-original.jpg';
 
 const Instancias = () => {
     const { jsonData, updateJsonData } = useContext(DataContext);
@@ -49,7 +47,6 @@ const Instancias = () => {
 
     return (
         <div>
-            <Hero imageSrc={imgBg} title="Crea torneos de cualquier deporte." />
             <ButtonBack onClick={() => history(-1)} />
             <MainTitle title="Elige el tipo de torneo" />
 

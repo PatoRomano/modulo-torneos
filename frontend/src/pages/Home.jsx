@@ -6,14 +6,12 @@ import { DataContext } from '../context/DataContext';
 //Components
 import Card from '../components/Card';
 import MainTitle from '../components/MainTitle';
-import Hero from '../components/Hero';
 
 //Images
 import ImageSoccer from '../assets/deportes/soccer.jpg';
 import ImageHandball from '../assets/deportes/handball.jpg';
 import ImagePaddle from '../assets/deportes/paddle.jpg';
 
-import imgBg from '../assets/principales/world-cup-original.jpg';
 import FloatingIcons from '../components/FloatingIcons';
 
 const Home = () => {
@@ -47,7 +45,6 @@ const Home = () => {
 
     return (
         <div>
-            <Hero imageSrc={imgBg} title="Crea torneos de cualquier deporte." />
             <MainTitle title="Elige tu deporte!" />
             <FloatingIcons/>
 
