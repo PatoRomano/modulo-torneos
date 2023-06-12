@@ -15,7 +15,7 @@
 .navbar-title {
     display: flex;
     align-items: center;
-    margin-left: 25rem;
+    margin-left: 0;
 }
 
 .title-sports {
@@ -34,7 +34,7 @@
     align-items: center;
     margin: 0;
     padding: 0;
-    margin-right: 25rem;
+    margin-right: 0;
 }
 
 .navbar-item {
