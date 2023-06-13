@@ -13,13 +13,13 @@ const FloatingIcons = () => {
                 <span className="floating-icons__tooltip">Árbitros</span>
             </div>
             <div className="floating-icons__item">
-                <Link to='/arbitros'>
+                <Link to='/jugadores'>
                     <RiUserFill className="floating-icons__icon" />
                 </Link>
                 <span className="floating-icons__tooltip">Jugadores</span>
             </div>
             <div className="floating-icons__item">
-                <Link to='/arbitros'>
+                <Link to='/equipos'>
                     <RiTeamFill className="floating-icons__icon" />
                 </Link>
                 <span className="floating-icons__tooltip">Equipos</span>

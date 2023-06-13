@@ -12,7 +12,10 @@ import Canchas from './pages/Canchas.jsx'
 import Espacios from './pages/Espacios.jsx'
 import Instancias from './pages/Instancias.jsx'
 import Dias from './pages/Dias.jsx'
-import Arbitros from './pages/Arbitros';
+import Lista from './pages/Lista';
+import TablaArbitros from './components/TablaArbitros';
+import TablaJugadores from './components/TablaJugadores';
+import TablaEquipos from './components/TablaEquipos';
 
 function App() {
 
@@ -48,7 +51,15 @@ function App() {
           />
           <Route
             path="/arbitros"
-            element={<Arbitros />}
+            element={<Lista tabla={<TablaArbitros/>}/>}
+          />
+                    <Route
+            path="/jugadores"
+            element={<Lista tabla={<TablaJugadores/>}/>}
+          />
+                    <Route
+            path="/equipos"
+            element={<Lista tabla={<TablaEquipos/>}/>}
           />
         </Routes>
       </BrowserRouter>
