@@ -51,15 +51,15 @@ function App() {
           />
           <Route
             path="/arbitros"
-            element={<Lista tabla={<TablaArbitros/>}/>}
+            element={<Lista tabla={<TablaArbitros />} titulo="Listado de árbitros" />}
           />
-                    <Route
+          <Route
             path="/jugadores"
-            element={<Lista tabla={<TablaJugadores/>}/>}
+            element={<Lista tabla={<TablaJugadores />} titulo="Listado de jugadores" />}
           />
-                    <Route
+          <Route
             path="/equipos"
-            element={<Lista tabla={<TablaEquipos/>}/>}
+            element={<Lista tabla={<TablaEquipos />} titulo="Listado de equipos" />}
           />
         </Routes>
       </BrowserRouter>

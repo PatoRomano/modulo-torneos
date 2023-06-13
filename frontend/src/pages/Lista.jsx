@@ -7,7 +7,7 @@ import ButtonBack from "../components/ButtonBack";
 import TablaArbitros from '../components/TablaArbitros';
 import FloatingIcons from '../components/FloatingIcons';
 
-const Lista = ({tabla}) => {
+const Lista = ({tabla, titulo}) => {
 
     // NAVIGATE PARA BOTON VOLVER ATRAS
     const history = useNavigate()
@@ -15,7 +15,7 @@ const Lista = ({tabla}) => {
     return (
         <div>
             <ButtonBack onClick={() => history(-1)} />
-            <MainTitle title="Listado de árbitros" />
+            <MainTitle title={titulo} />
             <FloatingIcons/>
             {tabla}
         </div>

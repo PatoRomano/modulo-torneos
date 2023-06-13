@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+
 import { FaTrashAlt, FaArrowDown } from 'react-icons/fa';
-import { BsPlusCircle } from 'react-icons/bs';
+import { BsPencilSquare } from 'react-icons/bs';
+import { AiFillPlusCircle } from 'react-icons/ai';
+
 import '../styles/Tabla.css'
 
 const TablaArbitros = () => {
@@ -28,7 +31,7 @@ const TablaArbitros = () => {
         <div className="tabla-btn-container">
             <div className='btn-agregar-container'>
                 <button className='btn-agregar' onClick={agregarArbitro}>
-                    <BsPlusCircle />
+                    <AiFillPlusCircle />
                     Agregar nuevo
                 </button>
             </div>
@@ -58,6 +61,9 @@ const TablaArbitros = () => {
                                 </td>
                                 <td>
                                     <div className='btn-container'>
+                                        <button className='editar-btn' title='Editar' onClick={() => editarFila(fila.id)}>
+                                            <BsPencilSquare />
+                                        </button>
                                         <button className='desactivar-btn' title='Desactivar' onClick={() => eliminarFila(fila.id)}>
                                             <FaArrowDown />
                                         </button>
