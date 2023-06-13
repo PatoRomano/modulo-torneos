@@ -34,6 +34,7 @@ const TablaEquipos = () => {
                     <AiFillPlusCircle />
                     Agregar nuevo
                 </button>
+                <Modal isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleFormSubmit} flag="agregar" />
             </div>
             <div className="tabla-container">
                 <table className="tabla">
@@ -64,6 +65,7 @@ const TablaEquipos = () => {
                                         <button className='editar-btn' title='Editar' onClick={() => editarFila(fila.id)}>
                                             <BsPencilSquare />
                                         </button>
+                                        <Modal isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleFormSubmit} flag="editar" />
                                         <button className='eliminar-btn' title='Eliminar' onClick={() => eliminarFila(fila.id)}>
                                             <FaTrashAlt />
                                         </button>

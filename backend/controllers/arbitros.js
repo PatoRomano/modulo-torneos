@@ -46,11 +46,12 @@ const createItem = async (req, res) => {
         where: { dni: body.dni } 
     });
 
-    if (arbitro) {
-        return res.send({ error: "Ya existe un arbitro con ese DNI" })
+
+    if (Array.isArray(arbitro) && arbitro.length !== 0) {
+        return res.send({ error: arbitro })
     }
 
-    arbitro = await Arbitro.create(body);
+    await arbitro.create(body);
     res.send({ arbitro })
 
 }
