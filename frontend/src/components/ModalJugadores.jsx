@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/Modal.css';
 
-const Modal = ({ isOpen, onClose, onSubmit }) => {
+const ModalJugadores = ({ isOpen, onClose, onSubmit }) => {
   if (!isOpen) {
     return null;
   }
@@ -28,6 +28,10 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
             DNI:
             <input type="text" name="dni" required />
           </label>
+          <label>
+            Fecha Nac.:
+            <input type="date" name="fecha_nac" required />
+          </label>
           <div className="modal-buttons">
             <button type="submit">Guardar</button>
             <button onClick={onClose}>Cerrar</button>
@@ -38,4 +42,4 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
   );
 };
 
-export default Modal;
+export default ModalJugadores;

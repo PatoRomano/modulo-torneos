@@ -5,8 +5,17 @@ import { BsPencilSquare } from 'react-icons/bs';
 import { AiFillPlusCircle } from 'react-icons/ai';
 
 import '../styles/Tabla.css'
+import ModalEquipos from './ModalEquipos';
+import ErrorMessage from './ErrorMessage';
 
 const TablaEquipos = () => {
+
+    // ----------------------------- OBTENER LISTADO DE EQUIPOS -----------------------------------
+
+    useEffect(() => {
+        fetchEquipos();
+    }, [])
+
     const [equipos, setEquipos] = useState([]);
 
     const fetchEquipos = async () => {
@@ -17,24 +26,86 @@ const TablaEquipos = () => {
         }
     }
 
-    const agregarEquipo = async () => {
-        console.log('Hola');
-    }
+    // ----------------------------- FIN OBTENER LISTADO DE EQUIPOS -----------------------------------
+
+    // ----------------------------- CONTROLAR MENSAJE DE ERROR -----------------------------------
+    const [showError, setShowError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleCloseError = () => {
+        setShowError(false);
+    };
 
 
-    useEffect(() => {
-        fetchEquipos();
-    }, [])
+    // ----------------------------- FIN CONTROLAR MENSAJE DE ERROR -----------------------------------
+
+    // ----------------------------- CONTROLAR MODAL -----------------------------------
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const [deporteId, setDeporteId] = useState(1);
+
+    const handleFormSubmit = async (form) => {
+        const nombre = form.nombre.value;
+        const deporte_id = deporteId;
+
+        const body = {
+            nombre: nombre,
+            deporte_id: deporte_id,
+        }
+
+        console.log(body);
+        try {
+            const response = await fetch('http://localhost:3001/api/equipos/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            });
+
+            const data = await response.json();
+            console.log(data);
+            if (data.error !== null) {
+                setErrorMessage("Ya existe ese equipo.")
+                setShowError(true);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+
+        handleCloseModal();
+    };
+
+    // ----------------------------- FIN CONTROLAR MODAL -----------------------------------
+
+
+    // --------------------- CONTROLAR SELECT -----------------------
+
+    const handleSeleccionChange = (valor) => {
+        setDeporteId(valor);
+    };
+
+    // --------------------- FIN CONTROLAR SELECT -----------------------
 
 
     return (
         <div className="tabla-btn-container">
+            <ErrorMessage text={errorMessage} onClose={handleCloseError} show={showError} />
             <div className='btn-agregar-container'>
-                <button className='btn-agregar' onClick={agregarEquipo}>
+                <button className='btn-agregar' onClick={handleOpenModal}>
                     <AiFillPlusCircle />
                     Agregar nuevo
                 </button>
-                <Modal isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleFormSubmit} flag="agregar" />
+                <ModalEquipos isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleFormSubmit} onSeleccionChange={handleSeleccionChange} />
             </div>
             <div className="tabla-container">
                 <table className="tabla">
@@ -65,7 +136,7 @@ const TablaEquipos = () => {
                                         <button className='editar-btn' title='Editar' onClick={() => editarFila(fila.id)}>
                                             <BsPencilSquare />
                                         </button>
-                                        <Modal isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleFormSubmit} flag="editar" />
+                                        <ModalEquipos isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleFormSubmit} onSeleccionChange={handleSeleccionChange} />
                                         <button className='eliminar-btn' title='Eliminar' onClick={() => eliminarFila(fila.id)}>
                                             <FaTrashAlt />
                                         </button>

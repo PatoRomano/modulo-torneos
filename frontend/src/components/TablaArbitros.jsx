@@ -5,7 +5,7 @@ import { BsPencilSquare } from 'react-icons/bs';
 import { AiFillPlusCircle } from 'react-icons/ai';
 
 import '../styles/Tabla.css'
-import Modal from './ModalEquipos';
+import ModalArbitros from './ModalArbitros';
 import ErrorMessage from './ErrorMessage';
 
 const TablaArbitros = () => {
@@ -95,7 +95,7 @@ const TablaArbitros = () => {
                     <AiFillPlusCircle />
                     Agregar nuevo
                 </button>
-                <Modal isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleFormSubmit} />
+                <ModalArbitros isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleFormSubmit} />
             </div>
             <div className="tabla-container">
                 <table className="tabla">
@@ -126,7 +126,7 @@ const TablaArbitros = () => {
                                         <button className='editar-btn' title='Editar' onClick={() => editarFila(fila.id)}>
                                             <BsPencilSquare />
                                         </button>
-                                        <Modal isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleFormSubmit} />
+                                        <ModalArbitros isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleFormSubmit} />
                                         <button className='desactivar-btn' title='Desactivar' onClick={() => eliminarFila(fila.id)}>
                                             <FaArrowDown />
                                         </button>

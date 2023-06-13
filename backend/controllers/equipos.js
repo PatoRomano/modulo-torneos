@@ -42,7 +42,15 @@ const createItem = async (req, res) => {
 
     const { body } = req;
 
-    const equipo = await Equipo.create(body);
+    let equipo = await Equipo.findAll({ 
+        where: { nombre: body.nombre } 
+    });
+
+    if (Array.isArray(equipo) && equipo.length !== 0) {
+        return res.send({ error: equipo })
+    }
+
+    equipo = await Equipo.create(body);
     res.send({ equipo })
 
 }
