@@ -17,6 +17,7 @@ import Instancias from './pages/Instancias.jsx'
 import Dias from './pages/Dias.jsx'
 import Lista from './pages/Lista';
 import Invitado from './pages/Invitado';
+import Partidos from './pages/Partidos';
 
 
 function App() {
@@ -27,13 +28,17 @@ function App() {
         <Navbar />
         <Hero imageSrc={imgBg} title="Crea torneos de cualquier deporte." />
         <Routes>
-        <Route
+          <Route
             path="/"
             element={<Invitado />}
           />
           <Route
             path="/admin"
             element={<Home />}
+          />
+          <Route
+            path="/torneo/:id"
+            element={<Partidos />}
           />
           <Route
             path="/sedes"

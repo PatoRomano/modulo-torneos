@@ -50,7 +50,9 @@ const Invitado = () => {
                                         {fila.id}
                                     </td>
                                     <td>
-                                        {fila.nombre}
+                                        <Link to={`/torneo/${fila.id}`} className='card-link'>
+                                            {fila.nombre}
+                                        </Link>
                                     </td>
                                     <td>
                                         {fila.deporte_id}
