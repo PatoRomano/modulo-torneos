@@ -1,5 +1,6 @@
 import React from 'react';
 import { RiUser2Fill, RiTeamFill, RiUserFill } from 'react-icons/ri';
+import { GiTrophyCup } from 'react-icons/gi'
 import '../styles/FloatingIcons.css';
 import { Link } from 'react-router-dom';
 
@@ -23,6 +24,12 @@ const FloatingIcons = () => {
                     <RiTeamFill className="floating-icons__icon" />
                 </Link>
                 <span className="floating-icons__tooltip">Equipos</span>
+            </div>
+            <div className="floating-icons__item">
+                <Link to='/admin'>
+                    <GiTrophyCup className="floating-icons__icon" />
+                </Link>
+                <span className="floating-icons__tooltip">Crear torneo</span>
             </div>
         </div>
     );
