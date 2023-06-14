@@ -1,5 +1,6 @@
 const DataTypes = require("sequelize");
 const { sequelize } = require("../config/mysql");
+//const Deporte = require('./deportes');
 
 const Equipo = sequelize.define(
     "equipos",
@@ -22,4 +23,11 @@ const Equipo = sequelize.define(
     }
 );
 
+/* Equipo.findAll = function () {
+    Equipo.belongsTo(Deporte, {
+        foreignKey: 'deporte_id'
+    })
+
+    return Equipo.findAll({include: Deporte})
+}; */
 module.exports = Equipo;
