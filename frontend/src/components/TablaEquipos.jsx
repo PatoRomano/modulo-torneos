@@ -62,7 +62,6 @@ const TablaEquipos = () => {
             deporte_id: deporte_id,
         }
 
-        console.log(body);
         try {
             const response = await fetch('http://localhost:3001/api/equipos/', {
                 method: 'POST',
@@ -73,8 +72,8 @@ const TablaEquipos = () => {
             });
 
             const data = await response.json();
-            console.log(data);
-            if (data.error !== null) {
+            if (data.error === "Ya existe") {
+                console.log(data)
                 setErrorMessage("Ya existe ese equipo.")
                 setShowError(true);
             }

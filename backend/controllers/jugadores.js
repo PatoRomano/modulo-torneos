@@ -49,7 +49,7 @@ const createItem = async (req, res) => {
     });
 
     if (jugador) {
-        return res.send({ error: "Ya existe un jugador con ese DNI" })
+        return res.send({ error: "Ya existe" })
     }
     jugador = await Jugador.create(body);
     res.send({ jugador })

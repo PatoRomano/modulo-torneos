@@ -47,7 +47,7 @@ const createItem = async (req, res) => {
     });
 
     if (Array.isArray(equipo) && equipo.length !== 0) {
-        return res.send({ error: equipo })
+        return res.send({ error: "Ya existe" })
     }
 
     equipo = await Equipo.create(body);

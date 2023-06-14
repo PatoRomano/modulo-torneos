@@ -48,7 +48,7 @@ const createItem = async (req, res) => {
 
 
     if (Array.isArray(arbitro) && arbitro.length !== 0) {
-        return res.send({ error: arbitro })
+        return res.send({ error: "Ya existe" })
     }
 
     await arbitro.create(body);
