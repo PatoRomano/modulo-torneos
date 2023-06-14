@@ -14,15 +14,17 @@
 }
 
 .tabla-container {
-    width: 100%;
+    width: 60%;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: auto;
+    max-height: 300px;
 }
 
 .tabla {
-    width: 50%;
+    width: 100%;
     border-collapse: separate;
     border-spacing: 0;
     text-align: left;

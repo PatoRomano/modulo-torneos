@@ -44,13 +44,14 @@ const createItem = async (req, res) => {
 
     const { body } = req;
 
-    const jugador = await Jugador.findAll({ 
+    let jugador = await Jugador.findAll({ 
         where: { dni: body.dni } 
     });
 
-    if (jugador) {
+    if (Array.isArray(jugador) && jugador.length !== 0) {
         return res.send({ error: "Ya existe" })
     }
+
     jugador = await Jugador.create(body);
     res.send({ jugador })
 

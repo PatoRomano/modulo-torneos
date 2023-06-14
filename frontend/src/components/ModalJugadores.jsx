@@ -2,6 +2,9 @@ import React from 'react';
 import '../styles/Modal.css';
 
 const ModalJugadores = ({ isOpen, onClose, onSubmit }) => {
+  const today = new Date();
+  const minDate = new Date(today.getFullYear() - 16, today.getMonth(), today.getDate()).toISOString().split('T')[0];
+
   if (!isOpen) {
     return null;
   }
@@ -30,7 +33,7 @@ const ModalJugadores = ({ isOpen, onClose, onSubmit }) => {
           </label>
           <label>
             Fecha Nac.:
-            <input type="date" name="fecha_nac" required />
+            <input type="date" name="fecha_nac" max={minDate} required />
           </label>
           <div className="modal-buttons">
             <button type="submit">Guardar</button>

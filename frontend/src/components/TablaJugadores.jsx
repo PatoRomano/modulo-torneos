@@ -6,6 +6,7 @@ import { AiFillPlusCircle } from 'react-icons/ai';
 
 import '../styles/Tabla.css'
 import ModalJugadores from './ModalJugadores';
+import ErrorMessage from './ErrorMessage';
 
 const TablaJugadores = () => {
 
@@ -33,7 +34,7 @@ const TablaJugadores = () => {
     // ----------------------------- FIN OBTENER LISTADO DE JUGADORES -----------------------------------
 
 
-    
+
     // ----------------------------- CONTROLAR MENSAJE DE ERROR -----------------------------------
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -80,8 +81,7 @@ const TablaJugadores = () => {
             });
 
             const data = await response.json();
-            console.log(data);
-            if (data.error !== null) {
+            if (data.error === "Ya existe") {
                 setErrorMessage("Ya existe ese jugador.")
                 setShowError(true);
             }
@@ -97,6 +97,7 @@ const TablaJugadores = () => {
 
     return (
         <div className="tabla-btn-container">
+            <ErrorMessage text={errorMessage} onClose={handleCloseError} show={showError} />
             <div className='btn-agregar-container'>
                 <button className='btn-agregar' onClick={handleOpenModal}>
                     <AiFillPlusCircle />
@@ -141,7 +142,7 @@ const TablaJugadores = () => {
                                         <button className='editar-btn' title='Editar' onClick={() => editarFila(fila.id)}>
                                             <BsPencilSquare />
                                         </button>
-                                        <ModalJugadores isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleFormSubmit}/>
+                                        <ModalJugadores isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleFormSubmit} />
                                         <button className='eliminar-btn' title='Eliminar' onClick={() => eliminarFila(fila.id)}>
                                             <FaTrashAlt />
                                         </button>
