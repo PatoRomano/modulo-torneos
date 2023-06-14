@@ -7,6 +7,8 @@ import { AiFillPlusCircle } from 'react-icons/ai';
 import '../styles/Tabla.css'
 import ModalJugadores from './ModalJugadores';
 import ErrorMessage from './ErrorMessage';
+import { RiTeamFill } from 'react-icons/ri';
+import ModalAsignarEquipo from './ModalAsignarEquipo';
 
 const TablaJugadores = () => {
 
@@ -46,7 +48,7 @@ const TablaJugadores = () => {
 
     // ----------------------------- FIN CONTROLAR MENSAJE DE ERROR -----------------------------------
 
-    // ----------------------------- CONTROLAR MODAL -----------------------------------
+    // ----------------------------- CONTROLAR MODAL CREAR JUGADOR -----------------------------------
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -92,7 +94,58 @@ const TablaJugadores = () => {
         handleCloseModal();
     };
 
-    // ----------------------------- FIN CONTROLAR MODAL -----------------------------------
+    // ----------------------------- FIN CONTROLAR MODAL CREAR JUGADOR -----------------------------------
+
+        // ----------------------------- CONTROLAR MODAL ASIGNAR EQUIPO -----------------------------------
+
+        const [isModalAsignOpen, setIsModalAsignOpen] = useState(false);
+
+        const handleOpenModalAsign = () => {
+            setIsModalAsignOpen(true);
+        };
+    
+        const handleCloseModalAsign = () => {
+            setIsModalAsignOpen(false);
+        };
+
+        const [equipoId, setEquipoId] = useState(3);
+        const [jugadorId, setJugadorId] = useState(null);
+    
+        const handleFormAsignSubmit = async (form) => {
+            const equipo_id = equipoId;
+    
+            const body = {
+                equipo_id: equipo_id,
+            }
+    
+            try {
+                const response = await fetch(`http://localhost:3001/api/jugadores/${jugadorId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+    
+                const data = await response.json();
+                if (data.error === "Ya existe") {
+                    setErrorMessage("Ya existe ese jugador.")
+                    setShowError(true);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+    
+            handleCloseModalAsign();
+        };
+    
+        // ----------------------------- FIN CONTROLAR MODAL ASIGNAR EQUIPO -----------------------------------
+
+    // --------------------- CONTROLAR SELECT -----------------------
+
+    const handleSeleccionChange = (valor) => {
+        setEquipoId(valor);
+    };
 
 
     return (
@@ -135,14 +188,19 @@ const TablaJugadores = () => {
                                     {fila.fecha_nac}
                                 </td>
                                 <td>
-                                    {fila.equipo_id}
+                                    {fila.equipo_id ? fila.equipo_id : "No pertenece a ningun equipo"}
                                 </td>
                                 <td>
                                     <div className='btn-container'>
+                                        {fila.equipo_id === null && (
+                                            <button className='asignar-btn' title='Asignar equipo' onClick={() => {handleOpenModalAsign(fila.id);setJugadorId(fila.id)}}>
+                                                <RiTeamFill />
+                                            </button>
+                                        )}
+                                        <ModalAsignarEquipo isOpen={isModalAsignOpen} onClose={handleCloseModalAsign} onSubmit={handleFormAsignSubmit} onSeleccionChange={handleSeleccionChange} />
                                         <button className='editar-btn' title='Editar' onClick={() => editarFila(fila.id)}>
                                             <BsPencilSquare />
                                         </button>
-                                        <ModalJugadores isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleFormSubmit} />
                                         <button className='eliminar-btn' title='Eliminar' onClick={() => eliminarFila(fila.id)}>
                                             <FaTrashAlt />
                                         </button>
