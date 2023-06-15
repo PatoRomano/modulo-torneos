@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/Calendar.css'
 import { Link } from 'react-router-dom';
+import { DataContext } from '../context/DataContext';
 
 
 const Calendar = () => {
     const minDate = new Date;
     minDate.setDate(minDate.getDate() + 1);
 
-    const MAX_SELECTED_SLOTS = 3;
+    const { jsonData, updateJsonData } = useContext(DataContext);
+
+    const maxPartidos = jsonData.instancia === "semifinal" ? 3 : jsonData.instancia === "cuartos" ? 7 : 15;
+
+    const MAX_SELECTED_SLOTS = maxPartidos;
     const unavailableSlots = [
         { hora_inicio: "20:00" },
         { hora_inicio: "16:00" }
