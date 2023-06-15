@@ -14,3 +14,7 @@ h1 {
 .info {
     font-weight: light;
 }
+
+.text {
+    margin-bottom: 2rem;
+}
