@@ -1,0 +1,74 @@
+/* Calendar.css */
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.calendar {
+    width: 40%;
+    color: white;
+}
+
+.time-slots {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 2rem;
+}
+
+.slot {
+    background-color: rgb(104, 104, 104);
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    padding-top: .5rem;
+    padding-left: 1.5rem;
+    height: 2rem;
+    width: 4rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 1px 1px 10px 1px black;
+}
+
+.selected {
+    background-color: rgb(57, 172, 82);
+}
+
+.date-picker {
+    display: flex;
+    align-items: center;
+    width: 6rem;
+}
+
+.line {
+    background-color: white;
+    height: 2px;
+    width: 100%;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-continuar {
+    font-size: 20px;
+    font-weight: bolder;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 10px;
+    background-color: #1d5c8f;
+    box-shadow: 1px 1px 10px 1px black;
+}
+
+.hide {
+    display: none;
+}
+
+.slot.unavailable {
+    background-color: rgb(177, 102, 102) !important;
+    pointer-events: none;
+}

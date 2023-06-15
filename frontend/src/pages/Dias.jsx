@@ -13,6 +13,7 @@ import ImageCanchita from '../assets/sedes/lacanchita.jpg';
 import ImageFairPlay from '../assets/sedes/fairplay.jpg';
 
 import ChosenInfo from '../components/ChosenInfo';
+import Calendar from '../components/Calendar';
 
 const Dias = () => {
     const { jsonData, updateJsonData } = useContext(DataContext);
@@ -53,7 +54,7 @@ const Dias = () => {
             <ButtonBack onClick={() => history(-1)} />
             <ChosenInfo precioJugador='1500' precioArbitro='500'/>
             <MainTitle title="Elige los dias y horarios" />
-
+            <Calendar/>
         </div>
     )
 }
