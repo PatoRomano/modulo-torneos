@@ -43,7 +43,7 @@ const Instancias = () => {
         if (response.ok) {
             setInstancias(json.instancias)
 
-            const itemsFiltrados = json.instancias.filter((item) => item.nombre != 'final');
+            const itemsFiltrados = json.instancias.filter((item) => item.nombre != 'final' && item.nombre != 'octavos');
             setInstanciasFiltradas(itemsFiltrados);
         }
     }
