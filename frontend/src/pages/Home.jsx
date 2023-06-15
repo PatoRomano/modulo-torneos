@@ -21,8 +21,8 @@ const Home = () => {
 
     const { jsonData, updateJsonData } = useContext(DataContext);
 
-    const handleClick = (elem) => {
-        const newData = { deporte: elem };
+    const handleClick = (elem, elem2) => {
+        const newData = { deporte: elem, deporte_id: elem2 };
         updateJsonData(newData);
     };
 
@@ -49,7 +49,7 @@ const Home = () => {
             <FloatingIcons/>
 
             {deportesFiltrados && Array.isArray(deportesFiltrados) && deportesFiltrados.map((deporte) => (
-                <Link to={"/sedes"} onClick={() => handleClick(deporte.nombre)} className='card-link'>
+                <Link to={"/sedes"} onClick={() => handleClick(deporte.nombre, deporte.id)} className='card-link'>
                     <Card key={deporte.id} title={deporte.nombre_publico} imageSrc={deporte.nombre === "futbol" ? ImageSoccer : deporte.nombre === "paddle" ? ImagePaddle : ImageHandball} />
                 </Link>
             ))}

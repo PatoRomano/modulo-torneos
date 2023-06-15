@@ -15,8 +15,18 @@ import ImageFairPlay from '../assets/sedes/fairplay.jpg';
 
 const Instancias = () => {
     const { jsonData, updateJsonData } = useContext(DataContext);
-    const handleClick = (elem) => {
-        const newData = { deporte: jsonData.deporte, sede: jsonData.sede, cancha: jsonData.cancha, espacio: jsonData.espacio, nombreEspacio: jsonData.nombreEspacio, instancia: elem };
+    const handleClick = (elem, elem2) => {
+        const newData = { 
+            deporte: jsonData.deporte, 
+            deporte_id: jsonData.deporte_id, 
+            sede: jsonData.sede, 
+            nombreSede: jsonData.nombreSede, 
+            cancha: jsonData.cancha, 
+            espacio: jsonData.espacio, 
+            nombreEspacio: jsonData.nombreEspacio, 
+            instancia: elem, 
+            instancia_id: elem2 
+        };
         updateJsonData(newData);
     };
 
@@ -51,7 +61,7 @@ const Instancias = () => {
             <MainTitle title="Elige el tipo de torneo" />
 
             {instanciasFiltradas && Array.isArray(instanciasFiltradas) && instanciasFiltradas.map((instancia) => (
-                <Link to='/dias' onClick={() => handleClick(instancia.nombre)} className='card-link'>
+                <Link to='/dias' onClick={() => handleClick(instancia.nombre, instancia.id)} className='card-link'>
                     <Card key={instancia.id} title={instancia.nombre_publico} imageSrc={ImageFairPlay} />
                 </Link>
             ))}

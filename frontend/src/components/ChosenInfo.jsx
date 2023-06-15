@@ -11,7 +11,8 @@ const ChosenInfo = ({ precioJugador, precioArbitro }) => {
     return (
         <div className='text-info'>
             <div className="main-text">
-                <h1 className='main-info'>Sede: {jsonData.sede}</h1>
+                <h1 className='main-info'>Torneo: {jsonData.nombre_torneo}</h1>
+                <h1 className='main-info'>Sede: {jsonData.nombreSede}</h1>
                 <h1 className='main-info'>Espacio: {jsonData.nombreEspacio}</h1>
                 <h1 className='main-info'>Instancia máxima: {jsonData.instancia}</h1>
                 <div className='line'></div>
@@ -27,6 +28,12 @@ const ChosenInfo = ({ precioJugador, precioArbitro }) => {
                                 </div>
                             </div>
                         ))}
+                    </div>
+                )}
+                <div className='line'></div>
+                {jsonData.arbitro && (
+                    <div className='main-text'>
+                        <h1>Arbitro: {jsonData.arbitro}</h1>
                     </div>
                 )}
             </div>

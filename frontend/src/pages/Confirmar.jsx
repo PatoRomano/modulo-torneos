@@ -1,5 +1,5 @@
 import { React, useContext, useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, json } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
 
 //Components
@@ -45,9 +45,16 @@ const Dias = () => {
 
     const handleSubmit = async () => {
 
-        const bodyTorneo = [];
+        const bodyTorneo = {
+            nombre: jsonData.nombre_torneo,
+            deporte_id: jsonData.deporte_id,
+            arbitro_id: jsonData.arbitro_id,
+            instancia_id: jsonData.instancia_id
+        };
 
-        try {
+        console.log(bodyTorneo);
+
+/*         try {
             const response = await fetch('http://localhost:3001/api/torneos/', {
                 method: 'POST',
                 headers: {
@@ -60,7 +67,7 @@ const Dias = () => {
             console.log(data);
         } catch (error) {
             console.error(error);
-        }
+        } */
 
         for (let i = 0; i < cantidadPartidos; i++) {
             console.log('hola');

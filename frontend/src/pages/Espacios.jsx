@@ -15,7 +15,14 @@ import ImageFairPlay from '../assets/sedes/fairplay.jpg';
 const Espacios = () => {
     const { jsonData, updateJsonData } = useContext(DataContext);
     const handleClick = (elem, elem1) => {
-        const newData = { deporte: jsonData.deporte, sede: jsonData.sede, cancha: jsonData.cancha, espacio: elem, nombreEspacio: elem1 };
+        const newData = { 
+            deporte: jsonData.deporte, 
+            deporte_id: jsonData.deporte_id, 
+            sede: jsonData.sede, 
+            nombreSede: jsonData.nombreSede, 
+            cancha: jsonData.cancha, 
+            espacio: elem, nombreEspacio: elem1 
+        };
         updateJsonData(newData);
     };
 

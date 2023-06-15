@@ -18,7 +18,16 @@ import Calendar from '../components/Calendar';
 const Dias = () => {
     const { jsonData, updateJsonData } = useContext(DataContext);
     const handleClick = (elem) => {
-        const newData = { deporte: jsonData.deporte, sede: jsonData.sede, cancha: jsonData.cancha, espacio: jsonData.espacio, nombreEspacio: jsonData.nombreEspacio, instancia: elem };
+        const newData = { 
+            deporte: jsonData.deporte, 
+            sede: jsonData.sede, 
+            nombreSede: jsonData.nombreSede, 
+            cancha: jsonData.cancha, 
+            espacio: jsonData.espacio, 
+            nombreEspacio: jsonData.nombreEspacio, 
+            instancia: jsonData.instancia, 
+            instancia_id: jsonData.instancia_id 
+        };
         updateJsonData(newData);
     };
 
