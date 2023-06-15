@@ -5,6 +5,7 @@ import '../styles/Calendar.css'
 import { Link } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
 import { format } from 'date-fns';
+import MainTitle from './MainTitle';
 
 
 const Calendar = () => {
@@ -124,12 +125,20 @@ const Calendar = () => {
                 dia: format(new Date(date), 'dd/MM/yyyy'),
                 horarios: selectedSlots[date],
             })),
+            nombre_torneo: inputValue,
         };
         updateJsonData(newData);
         console.log(newData);
     };
 
     const canContinue = Object.values(selectedSlots).flat().length === MAX_SELECTED_SLOTS;
+
+    const [inputValue, setInputValue] = useState('');
+
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
 
     return (
         <div className='calendar-container'>
@@ -149,7 +158,11 @@ const Calendar = () => {
                     <h2>Horarios seleccionados:</h2>
                     {renderSelectedSlots()}
                 </div>
-                {canContinue && <div className='button-container'>
+                <div className='button-container'>
+                    <h1>Ingresa el nombre del torneo:</h1>
+                    <input className="nombre-torneo" type="text" value={inputValue} onChange={handleInputChange} required />
+                </div>
+                {canContinue && inputValue !== '' && <div className='button-container'>
                     <Link to="/confirmar" onClick={handleClick}>
                         <button className='btn-continuar'>Continuar</button>
                     </Link>

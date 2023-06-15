@@ -4,10 +4,14 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 5rem;
+    width: 100%;
 }
 
 .calendar {
-    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 50%;
     color: white;
 }
 
@@ -72,4 +76,8 @@
 .slot.unavailable {
     background-color: rgb(177, 102, 102) !important;
     pointer-events: none;
+}
+
+.nombre-torneo {
+    width: 100%;
 }

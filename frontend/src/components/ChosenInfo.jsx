@@ -14,6 +14,7 @@ const ChosenInfo = ({ precioJugador, precioArbitro }) => {
                 <h1 className='main-info'>Sede: {jsonData.sede}</h1>
                 <h1 className='main-info'>Espacio: {jsonData.nombreEspacio}</h1>
                 <h1 className='main-info'>Instancia máxima: {jsonData.instancia}</h1>
+                <div className='line'></div>
                 {jsonData.dias && (
                     <div className="dias-info">
                         {jsonData.dias.map((dia, index) => (
@@ -30,6 +31,7 @@ const ChosenInfo = ({ precioJugador, precioArbitro }) => {
                 )}
             </div>
             <br />
+            <div className='line'></div>
             <div className="text">
                 {precioJugador && <h1 className='info'>Inscripción por jugador: ${precioJugador}</h1>}
                 {precioArbitro && <h1 className='info'>Árbitro por partido, por jugador: ${precioArbitro}</h1>}

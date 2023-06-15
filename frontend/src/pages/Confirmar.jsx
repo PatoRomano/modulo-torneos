@@ -15,6 +15,8 @@ import '../styles/Calendar.css';
 const Dias = () => {
     const { jsonData, updateJsonData } = useContext(DataContext);
 
+    const cantidadPartidos = jsonData.instancia === "semifinal" ? 3 : jsonData.instancia === "cuartos" ? 7 : 15;
+
     // NAVIGATE PARA BOTON VOLVER ATRAS
     const history = useNavigate()
 
@@ -41,6 +43,29 @@ const Dias = () => {
         //fetchDeportes();
     }, [])
 
+    const handleSubmit = async () => {
+
+        const bodyTorneo = [];
+
+        try {
+            const response = await fetch('http://localhost:3001/api/torneos/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyTorneo)
+            });
+
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
+
+        for (let i = 0; i < cantidadPartidos; i++) {
+            console.log('hola');
+        }
+    };
 
     return (
         <div>
@@ -48,7 +73,7 @@ const Dias = () => {
             <MainTitle title="Confirma si los datos son correctos:" />
             <ChosenInfo precioJugador='1500' precioArbitro='500' />
             <div className='button-container'>
-                <Link to="/">
+                <Link to="/" onClick={handleSubmit}>
                     <button className='btn-continuar'>Confirmar</button>
                 </Link>
             </div>
