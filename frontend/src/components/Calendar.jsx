@@ -4,6 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/Calendar.css'
 import { Link } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
+import { format } from 'date-fns';
 
 
 const Calendar = () => {
@@ -111,6 +112,23 @@ const Calendar = () => {
         });
     };
 
+    const handleClick = () => {
+        const newData = {
+            deporte: jsonData.deporte,
+            sede: jsonData.sede,
+            cancha: jsonData.cancha,
+            espacio: jsonData.espacio,
+            nombreEspacio: jsonData.nombreEspacio,
+            instancia: jsonData.instancia,
+            dias: Object.keys(selectedSlots).map((date) => ({
+                dia: format(new Date(date), 'dd/MM/yyyy'),
+                horarios: selectedSlots[date],
+            })),
+        };
+        updateJsonData(newData);
+        console.log(newData);
+    };
+
     const canContinue = Object.values(selectedSlots).flat().length === MAX_SELECTED_SLOTS;
 
     return (
@@ -132,7 +150,7 @@ const Calendar = () => {
                     {renderSelectedSlots()}
                 </div>
                 {canContinue && <div className='button-container'>
-                    <Link to="/">
+                    <Link to="/confirmar" onClick={handleClick}>
                         <button className='btn-continuar'>Continuar</button>
                     </Link>
                 </div>}

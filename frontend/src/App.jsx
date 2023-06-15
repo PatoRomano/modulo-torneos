@@ -18,6 +18,7 @@ import Dias from './pages/Dias.jsx'
 import Lista from './pages/Lista';
 import Invitado from './pages/Invitado';
 import Partidos from './pages/Partidos';
+import Confirmar from './pages/Confirmar';
 
 
 function App() {
@@ -71,6 +72,10 @@ function App() {
           <Route
             path="/equipos"
             element={<Lista tabla={<TablaEquipos />} titulo="Listado de equipos" />}
+          />
+          <Route
+            path="/confirmar"
+            element={<Confirmar />}
           />
         </Routes>
       </BrowserRouter>
