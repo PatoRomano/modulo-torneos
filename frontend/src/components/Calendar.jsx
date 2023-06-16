@@ -6,12 +6,15 @@ import { Link } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
 import { format } from 'date-fns';
 import MainTitle from './MainTitle';
+import Semifinal from './Semifinal';
+import Cuartos from './Cuartos';
 
 
 const Calendar = () => {
 
     useEffect(() => {
         fetchArbitros();
+        fetchEquipos();
     }, [])
 
     const minDate = new Date;
@@ -123,7 +126,7 @@ const Calendar = () => {
     const handleClick = () => {
         const newData = {
             deporte: jsonData.deporte,
-            deporte_id: jsonData.deporte_id, 
+            deporte_id: jsonData.deporte_id,
             sede: jsonData.sede,
             nombreSede: jsonData.nombreSede,
             cancha: jsonData.cancha,
@@ -138,6 +141,7 @@ const Calendar = () => {
             nombre_torneo: inputValue,
             arbitro_id: valorSeleccionado,
             arbitro: nombreArbitroSeleccionado,
+            equipos: equiposSeleccionados,
         };
         updateJsonData(newData);
         console.log(newData);
@@ -175,6 +179,28 @@ const Calendar = () => {
 
     // ----------------------------- FIN OBTENER LISTADO DE ARBITROS -----------------------------------
 
+    // ----------------------------- OBTENER LISTADO DE EQUIPOS -----------------------------------
+
+    const [equipos, setEquipos] = useState([]);
+    const [equiposFiltrados, setEquiposFiltrados] = useState([]);
+
+    const fetchEquipos = async () => {
+        const response = await fetch('http://localhost:3001/api/equipos/')
+        const json = await response.json()
+        if (response.ok) {
+            setEquipos(json.equipos)
+            setEquiposFiltrados(json.equipos.filter(equipo => equipo.deporte_id === 1));
+        }
+    }
+
+    // ----------------------------- FIN OBTENER LISTADO DE EQUIPOS -----------------------------------
+
+
+    const [equiposSeleccionados, setEquiposSeleccionados] = useState([]);
+
+    const handleSaveEquipos = (equipos) => {
+        setEquiposSeleccionados(equipos);
+    };
 
     return (
         <div className='calendar-container'>
@@ -205,6 +231,10 @@ const Calendar = () => {
                 <div className='button-container'>
                     <h1>Ingresa el nombre del torneo:</h1>
                     <input className="nombre-torneo" type="text" value={inputValue} onChange={handleInputChange} required />
+                </div>
+                <div>
+                    {maxPartidos === 3 && <Semifinal equipos={equiposFiltrados} onSave={handleSaveEquipos} />}
+                    {maxPartidos === 7 && <Cuartos equipos={equiposFiltrados} onSave={handleSaveEquipos} />}
                 </div>
                 {canContinue && inputValue !== '' && <div className='button-container'>
                     <Link to="/confirmar" onClick={handleClick}>
