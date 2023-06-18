@@ -1,4 +1,4 @@
-import { React, useContext, useEffect } from 'react';
+import { React, useContext, useEffect, useState } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
 
@@ -16,9 +16,9 @@ const Sedes = () => {
     // CONTEXTO
     const { jsonData, updateJsonData } = useContext(DataContext);
     const handleClick = (elem, elem2) => {
-        const newData = { 
-            deporte: jsonData.deporte, 
-            deporte_id: jsonData.deporte_id, 
+        const newData = {
+            deporte: jsonData.deporte,
+            deporte_id: jsonData.deporte_id,
             sede: elem,
             nombreSede: elem2
         };
@@ -27,6 +27,22 @@ const Sedes = () => {
 
     // NAVIGATE PARA BOTON VOLVER ATRAS
     const history = useNavigate()
+
+
+    useEffect(() => {
+        console.log(jsonData)
+        //fetchSedes();
+    }, [])
+
+/*     const [sedes, setSedes] = useState([]);
+    const fetchSedes = async () => {
+        const response = await fetch('http://localhost:3001/api/sedes/')
+        const json = await response.json()
+        if (response.ok) {
+            setSedes(json.sedes)
+        }
+    } */
+
 
     //SEDES
     const sedes = [
@@ -38,25 +54,6 @@ const Sedes = () => {
 
     //use Params
     const { id } = useParams();
-
-    /* 
-        const fetchDeportes = async () => {
-            const response = await fetch('http://localhost:3001/api/deportes/')
-            const json = await response.json()
-            if (response.ok) {
-                setDeportes(json.deportes)
-            }
-        } 
-    */
-
-    /*     useEffect(() => {
-            fetchDeportes();
-        }, []) 
-    */
-
-    useEffect(() => {
-        console.log(jsonData)
-    }, [])
 
 
     return (

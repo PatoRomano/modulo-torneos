@@ -65,8 +65,6 @@ const Confirmar = () => {
 
     const handleSubmit = async () => {
 
-        console.log(torneosFiltrados.id);
-
         const bodyTorneo = {
             nombre: jsonData.nombre_torneo,
             deporte_id: jsonData.deporte_id,
