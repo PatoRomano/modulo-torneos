@@ -12,7 +12,7 @@ import ChosenInfo from '../components/ChosenInfo';
 import '../styles/Calendar.css';
 
 
-const Dias = () => {
+const Confirmar = () => {
     const { jsonData, updateJsonData } = useContext(DataContext);
 
     const cantidadPartidos = jsonData.instancia === "semifinal" ? 3 : jsonData.instancia === "cuartos" ? 7 : 15;
@@ -54,24 +54,70 @@ const Dias = () => {
 
         console.log(bodyTorneo);
 
-/*         try {
-            const response = await fetch('http://localhost:3001/api/torneos/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(bodyTorneo)
-            });
-
-            const data = await response.json();
-            console.log(data);
-        } catch (error) {
-            console.error(error);
-        } */
-
-        for (let i = 0; i < cantidadPartidos; i++) {
-            console.log('hola');
+        /*         try {
+                    const response = await fetch('http://localhost:3001/api/torneos/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(bodyTorneo)
+                    });
+        
+                    const data = await response.json();
+                    console.log(data);
+                } catch (error) {
+                    console.error(error);
+                } */
+        let llave = 6;
+        let cantPartidos = 3;
+        let aumentoOrden = 1;
+        let bodyPartido = {};
+        if (jsonData.instancia === "cuartos") {
+            llave = 8;
+            cantPartidos = 5;
+            aumentoOrden = 3;
         }
+        jsonData.dias.map((dia) => {
+            dia.horarios.map((horario) => {
+
+
+                if (horario.orden >= cantPartidos) {
+                    bodyPartido = {
+                        torneo_id: 1,
+                        llave_id: llave + horario.orden,
+                        fecha: dia.dia + horario.hora
+                    }
+                } else {
+                    bodyPartido = {
+                        torneo_id: 1,
+                        llave_id: llave + horario.orden,
+                        equipo_uno_id: jsonData.equipos[horario.orden - 1],
+                        equipo_dos_id: jsonData.equipos[horario.orden + aumentoOrden],
+                        fecha: dia.dia + ' ' + horario.hora
+                    }
+                }
+
+                console.log(bodyPartido)
+
+                /*         try {
+                const response = await fetch('http://localhost:3001/api/partidos/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bodyPartido)
+                });
+    
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error(error);
+            } */
+
+            })
+        })
+
+
     };
 
     return (
@@ -88,4 +134,4 @@ const Dias = () => {
     )
 }
 
-export default Dias
+export default Confirmar

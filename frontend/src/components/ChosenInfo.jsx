@@ -23,7 +23,7 @@ const ChosenInfo = ({ precioJugador, precioArbitro }) => {
                                 <h3>El día: {dia.dia}</h3>
                                 <div className='time-slots'>
                                     {dia.horarios.map((horario, index) => (
-                                        <div className='slot' key={index}>{horario}</div>
+                                        <div className='slot' key={index}>{horario.hora}</div>
                                     ))}
                                 </div>
                             </div>

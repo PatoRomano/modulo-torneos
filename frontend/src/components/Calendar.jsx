@@ -123,7 +123,28 @@ const Calendar = () => {
 
     // ---------- ACTUALIZAR DATA CONTEXT -------------------------------------------------------------------
 
+    /*     Object.keys(selectedSlots[date]).map((hour, index) => ({
+            hora: selectedSlots[date][index],
+            orden: i,
+        }, i++)), */
+
     const handleClick = () => {
+        let i = 1;
+        const horarios = [];
+        const horariosPorDia = {};
+
+        Object.keys(selectedSlots).forEach((date) => {
+            const horarios = [];
+            selectedSlots[date].forEach((hour) => {
+                horarios.push({
+                    hora: hour,
+                    orden: i,
+                });
+                i++;
+            });
+            horariosPorDia[date] = horarios;
+        });
+
         const newData = {
             deporte: jsonData.deporte,
             deporte_id: jsonData.deporte_id,
@@ -136,7 +157,7 @@ const Calendar = () => {
             instancia_id: jsonData.instancia_id,
             dias: Object.keys(selectedSlots).map((date) => ({
                 dia: format(new Date(date), 'dd/MM/yyyy'),
-                horarios: selectedSlots[date],
+                horarios: horariosPorDia[date],
             })),
             nombre_torneo: inputValue,
             arbitro_id: valorSeleccionado,
