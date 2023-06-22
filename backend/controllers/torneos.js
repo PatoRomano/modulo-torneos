@@ -19,7 +19,8 @@ const { Torneo } = require('../models');
 const getItems = async (req, res) => {
 
     try {
-        const query = `SELECT t.id AS id, t.nombre AS nombre, de.nombre_publico AS deporte, CONCAT(ar.nombre, ' ', ar.apellido) AS arbitro, em.nombre_publico AS instancia, t.activo AS activo
+        const query = `SELECT t.id AS id, t.nombre AS nombre, de.nombre_publico AS deporte, CONCAT(ar.nombre, ' ', ar.apellido) AS arbitro, 
+        em.nombre_publico AS instancia, t.sede_id, t.activo AS activo
         FROM torneos AS t 
         INNER JOIN deportes AS de ON t.deporte_id = de.id 
         INNER JOIN arbitros AS ar ON t.arbitro_id = ar.id 

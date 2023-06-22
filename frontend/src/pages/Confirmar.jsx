@@ -10,6 +10,7 @@ import ButtonBack from "../components/ButtonBack"
 import ChosenInfo from '../components/ChosenInfo';
 
 import '../styles/Calendar.css';
+import baseUrl from '../assets/server';
 
 
 const Confirmar = () => {
@@ -69,45 +70,45 @@ const Confirmar = () => {
             nombre: jsonData.nombre_torneo,
             deporte_id: jsonData.deporte_id,
             arbitro_id: jsonData.arbitro_id,
-            instancia_id: jsonData.instancia_id
+            instancia_id: jsonData.instancia_id,
+            sede_id: jsonData.sede,
         };
 
         console.log(bodyTorneo);
 
-        /*         try {
-                    const response = await fetch('http://localhost:3001/api/torneos/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(bodyTorneo)
-                    });
-        
-                    const data = await response.json();
-                    console.log(data);
-                } catch (error) {
-                    console.error(error);
-                } */
+        try {
+            const response = await fetch('http://localhost:3001/api/torneos/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyTorneo)
+            });
+
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
 
 
 
         let llave = 6;
         let cantPartidos = 3;
         let aumentoOrden = 1;
-        let bodyPartido = {};
         if (jsonData.instancia === "cuartos") {
             llave = 8;
             cantPartidos = 5;
             aumentoOrden = 3;
         }
-        jsonData.dias.map((dia) => {
-            dia.horarios.map((horario) => {
-
+        jsonData.dias.map(async (dia) => {
+            dia.horarios.map(async (horario) => {
+                let bodyPartido = {};
                 if (horario.orden >= cantPartidos) {
                     bodyPartido = {
                         torneo_id: torneosFiltrados.id + 1,
                         llave_id: llave + horario.orden,
-                        fecha: dia.dia + horario.hora
+                        fecha: dia.dia + ' ' + horario.hora
                     }
                 } else {
                     bodyPartido = {
@@ -121,42 +122,50 @@ const Confirmar = () => {
 
                 console.log(bodyPartido)
 
-                /*         try {
-                const response = await fetch('http://localhost:3001/api/partidos/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(bodyPartido)
-                });
-    
-                const data = await response.json();
-                console.log(data);
-            } catch (error) {
-                console.error(error);
-            } */
+                try {
+                    const response = await fetch('http://localhost:3001/api/partidos/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(bodyPartido)
+                    });
+
+                    const data = await response.json();
+                    console.log(data);
+                } catch (error) {
+                    console.error(error);
+                }
 
             })
         })
 
         const bodyReserva = {
-            dias: jsonData.dias,
+            id_espacio: jsonData.espacio,
+            dias: jsonData.diasEnviar,
+            nombre: jsonData.nombreSolicitante,
+            apellido: jsonData.apellidoSolicitante,
+            dni: jsonData.dniSolicitante,
+            correo: jsonData.mailSolicitante,
+            contacto: jsonData.contactoSolicitante,
         };
 
-        /*         try {
-        const response = await fetch('http://localhost:3001/api/getReservaPorFecha/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(bodyReserva)
-        });
- 
-        const data = await response.json();
-        console.log(data);
-    } catch (error) {
-        console.error(error);
-    } */
+        console.log(bodyReserva);
+
+        try {
+            const response = await fetch(`${baseUrl}reservaTorneo/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyReserva)
+            });
+
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
 
     };
 

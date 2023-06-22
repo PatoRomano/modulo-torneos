@@ -161,6 +161,17 @@ const fetchUnavailableSlots = async (fecha) => {
         const horarios = [];
         const horariosPorDia = {};
 
+        const horariosEnviar = [];
+        const horariosPorDiaEnviar = [];
+
+        Object.keys(selectedSlots).forEach((date) => {
+            const horariosEnviar = [];
+            selectedSlots[date].forEach((hour) => {
+                horariosEnviar.push(hour);
+            });
+            horariosPorDiaEnviar[date] = horariosEnviar;
+        });
+
         Object.keys(selectedSlots).forEach((date) => {
             const horarios = [];
             selectedSlots[date].forEach((hour) => {
@@ -179,6 +190,7 @@ const fetchUnavailableSlots = async (fecha) => {
             sede: jsonData.sede,
             nombreSede: jsonData.nombreSede,
             cancha: jsonData.cancha,
+            cancha_id: jsonData.cancha_id,
             espacio: jsonData.espacio,
             nombreEspacio: jsonData.nombreEspacio,
             instancia: jsonData.instancia,
@@ -191,6 +203,15 @@ const fetchUnavailableSlots = async (fecha) => {
             arbitro_id: valorSeleccionado,
             arbitro: nombreArbitroSeleccionado,
             equipos: equiposSeleccionados,
+            nombreSolicitante: inputName,
+            apellidoSolicitante: inputLastname,
+            dniSolicitante: inputDNI,
+            mailSolicitante: inputMail,
+            contactoSolicitante: inputContact,
+            diasEnviar: Object.keys(selectedSlots).map((date) => ({
+                dia: format(new Date(date), 'dd/MM/yyyy'),
+                horarios: horariosPorDiaEnviar[date],
+            }))
         };
         updateJsonData(newData);
         console.log(newData);
@@ -199,9 +220,34 @@ const fetchUnavailableSlots = async (fecha) => {
     const canContinue = Object.values(selectedSlots).flat().length === MAX_SELECTED_SLOTS;
 
     const [inputValue, setInputValue] = useState('');
+    const [inputName, setInputName] = useState('');
+    const [inputLastname, setInputLastname] = useState('');
+    const [inputDNI, setInputDNI] = useState('');
+    const [inputMail, setInputMail] = useState('');
+    const [inputContact, setInputContact] = useState('');
 
     const handleInputChange = (event) => {
         setInputValue(event.target.value);
+    };
+
+    const handleNameChange = (event) => {
+        setInputName(event.target.value);
+    };
+
+    const handleLastnameChange = (event) => {
+        setInputLastname(event.target.value);
+    };
+
+    const handleDNIChange = (event) => {
+        setInputDNI(event.target.value);
+    };
+
+    const handleMailChange = (event) => {
+        setInputMail(event.target.value);
+    };
+
+    const handleContactChange = (event) => {
+        setInputContact(event.target.value);
     };
 
     const [valorSeleccionado, setValorSeleccionado] = useState(1);
@@ -284,6 +330,29 @@ const fetchUnavailableSlots = async (fecha) => {
                 <div>
                     {maxPartidos === 3 && <Semifinal equipos={equiposFiltrados} onSave={handleSaveEquipos} />}
                     {maxPartidos === 7 && <Cuartos equipos={equiposFiltrados} onSave={handleSaveEquipos} />}
+                </div>
+                <br />
+                <div className='line'></div>
+
+                <div className='button-container'>
+                    <h1>Ingresa el nombre del solicitante:</h1>
+                    <input className="nombre-torneo" type="text" value={inputName} onChange={handleNameChange} required />
+                </div>
+                <div className='button-container'>
+                    <h1>Ingresa el apellido del solicitante:</h1>
+                    <input className="nombre-torneo" type="text" value={inputLastname} onChange={handleLastnameChange} required />
+                </div>
+                <div className='button-container'>
+                    <h1>Ingresa el dni del solicitante:</h1>
+                    <input className="nombre-torneo" type="text" value={inputDNI} onChange={handleDNIChange} required />
+                </div>
+                <div className='button-container'>
+                    <h1>Ingresa el correo del solicitante:</h1>
+                    <input className="nombre-torneo" type="text" value={inputMail} onChange={handleMailChange} required />
+                </div>
+                <div className='button-container'>
+                    <h1>Ingresa el contacto del solicitante:</h1>
+                    <input className="nombre-torneo" type="text" value={inputContact} onChange={handleContactChange} required />
                 </div>
                 {canContinue && inputValue !== '' && <div className='button-container'>
                     <Link to="/confirmar" onClick={handleClick}>

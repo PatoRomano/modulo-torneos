@@ -22,6 +22,7 @@ const Instancias = () => {
             sede: jsonData.sede, 
             nombreSede: jsonData.nombreSede, 
             cancha: jsonData.cancha, 
+            cancha_id: jsonData.cancha_id, 
             espacio: jsonData.espacio, 
             nombreEspacio: jsonData.nombreEspacio, 
             instancia: elem, 
