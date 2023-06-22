@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 import MainTitle from './MainTitle';
 import Semifinal from './Semifinal';
 import Cuartos from './Cuartos';
+import baseUrl from '../assets/server';
 
 
 const Calendar = () => {
@@ -15,6 +16,7 @@ const Calendar = () => {
     useEffect(() => {
         fetchArbitros();
         fetchEquipos();
+        fetchUnavailableSlots(selectedDate);
     }, [])
 
     const minDate = new Date;
@@ -25,10 +27,34 @@ const Calendar = () => {
     const maxPartidos = jsonData.instancia === "semifinal" ? 3 : jsonData.instancia === "cuartos" ? 7 : 15;
 
     const MAX_SELECTED_SLOTS = maxPartidos;
-    const unavailableSlots = [
+
+    const [unavailableSlots, setUnavailableSlots] = useState([]);
+
+const fetchUnavailableSlots = async (fecha) => {
+        console.log(format(new Date(fecha), 'dd-MM-yyyy'))
+        try {
+            const response = await fetch(`${baseUrl}getReservaPorFecha/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id_espacio: jsonData.espacio,
+                    fecha: format(new Date(fecha), 'dd-MM-yyyy')
+                })
+            });
+            const json = await response.json();
+            console.log(json);
+            setUnavailableSlots(json);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+/*     const unavailableSlots = [
         { hora_inicio: "20:00" },
         { hora_inicio: "16:00" }
-    ];
+    ]; */
 
     const [selectedSlots, setSelectedSlots] = useState({});
     const [selectedDate, setSelectedDate] = useState(minDate);
@@ -37,6 +63,7 @@ const Calendar = () => {
         const isSelected = selectedSlots[selectedDate]?.includes(slot);
         const selectedDaySlots = selectedSlots[selectedDate] || [];
         let updatedSlots = { ...selectedSlots };
+
 
         if (isSelected) {
             const updatedDaySlots = selectedDaySlots.filter((s) => s !== slot);
@@ -55,6 +82,7 @@ const Calendar = () => {
     };
 
     const deselectAllSlots = (newDate) => {
+        fetchUnavailableSlots(newDate);
         const hasSelectedSlots = Object.keys(selectedSlots).length > 0;
         const isSameDay = newDate && newDate.toDateString() === selectedDate?.toDateString();
 

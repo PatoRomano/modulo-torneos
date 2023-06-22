@@ -1,3 +1,4 @@
+const { sequelize } = require('../config/mysql');
 const { Torneo } = require('../models');
 
 /** 
@@ -5,13 +6,37 @@ const { Torneo } = require('../models');
 * @param {*} req
 * @param {*} res
 */
+
+/* const getItems = async (req,res)  => {
+    const response = await sequelize.query('SELECT to.id, to.nombre, de.nombre_publico, ar.nombre, '
+    +'em.nombre_publico FROM torneos to '
+    +'INNER JOIN deportes de ON to.deporte_id = de.id '
+    +'INNER JOIN arbitros ar ON to.arbitro_id = ar.id '
+    +'INNER JOIN emparejamientos em ON to.instancia_id = em.id');
+    res.status(200).json(response.rows);
+} */
+
 const getItems = async (req, res) => {
 
-    const torneos = await Torneo.findAll({});
+    try {
+        const query = `SELECT t.id AS id, t.nombre AS nombre, de.nombre_publico AS deporte, CONCAT(ar.nombre, ' ', ar.apellido) AS arbitro, em.nombre_publico AS instancia, t.activo AS activo
+        FROM torneos AS t 
+        INNER JOIN deportes AS de ON t.deporte_id = de.id 
+        INNER JOIN arbitros AS ar ON t.arbitro_id = ar.id 
+        INNER JOIN emparejamientos AS em ON t.instancia_id = em.id`;
+        //const query = 'SELECT * FROM torneos'
+        const torneos = await sequelize.query(query, { type: sequelize.QueryTypes.SELECT });
 
-    res.send({ torneos });
+        res.send({ torneos });
+        console.log(torneos)
+    } catch (error) {
+        res.status(500).send({ error });
+    }
+    /*     const torneos = await Torneo.findAll({});
+    
+        res.send({ torneos }); */
 
-}
+} 
 
 
 

@@ -16,6 +16,7 @@ const Invitado = () => {
         const response = await fetch('http://localhost:3001/api/torneos/')
         const json = await response.json()
         if (response.ok) {
+            console.log(json.torneos)
             setTorneos(json.torneos)
 
             const itemsFiltrados = json.torneos.filter((item) => item.activo === 1);
@@ -55,13 +56,13 @@ const Invitado = () => {
                                         </Link>
                                     </td>
                                     <td>
-                                        {fila.deporte_id}
+                                        {fila.deporte}
                                     </td>
                                     <td>
-                                        {fila.arbitro_id}
+                                        {fila.arbitro}
                                     </td>
                                     <td>
-                                        {fila.instancia_id}
+                                        {fila.instancia}
                                     </td>
                                 </tr>
                             ))}

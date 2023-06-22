@@ -9,6 +9,9 @@
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "devServer": {
+    "host": "0.0.0.0"
+  },
   "dependencies": {
     "date-fns": "^2.30.0",
     "react": "^18.2.0",
