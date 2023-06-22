@@ -11,6 +11,7 @@ import ButtonBack from "../components/ButtonBack"
 import ImageVasXMas from '../assets/sedes/vasxmas.jpg';
 import ImageCanchita from '../assets/sedes/lacanchita.jpg';
 import ImageFairPlay from '../assets/sedes/fairplay.jpg';
+import baseUrl from '../assets/server';
 
 const Espacios = () => {
     const { jsonData, updateJsonData } = useContext(DataContext);
@@ -45,7 +46,7 @@ const Espacios = () => {
 
     const fetchEspacios = async () => {
         try {
-            const response = await fetch('http://192.168.149.239:3000/espacios/', {
+            const response = await fetch(`${baseUrl}espacios/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

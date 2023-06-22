@@ -11,6 +11,7 @@ import ButtonBack from "../components/ButtonBack"
 import ImageVasXMas from '../assets/sedes/vasxmas.jpg';
 import ImageCanchita from '../assets/sedes/lacanchita.jpg';
 import ImageFairPlay from '../assets/sedes/fairplay.jpg';
+import baseUrl from '../assets/server';
 
 const Canchas = () => {
     const { jsonData, updateJsonData } = useContext(DataContext);
@@ -37,7 +38,7 @@ const Canchas = () => {
     const [canchas, setCanchas] = useState([]);
     const fetchCanchas = async () => {
         try {
-            const response = await fetch('http://192.168.149.239:3000/canchas/', {
+            const response = await fetch(`${baseUrl}canchas/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

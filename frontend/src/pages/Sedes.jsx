@@ -7,6 +7,9 @@ import Card from '../components/Card';
 import MainTitle from '../components/MainTitle';
 import ButtonBack from "../components/ButtonBack"
 
+//URL
+import baseUrl from '../assets/server.jsx'
+
 //Images
 import ImageVasXMas from '../assets/sedes/vasxmas.jpg';
 import ImageCanchita from '../assets/sedes/lacanchita.jpg';
@@ -37,7 +40,7 @@ const Sedes = () => {
     const [sedes, setSedes] = useState([]);
     const fetchSedes = async () => {
         try {
-            const response = await fetch('http://192.168.149.239:3000/empresasFutbol/')
+            const response = await fetch(`${baseUrl}empresasFutbol/`)
             const json = await response.json();
             console.log(json);
             setSedes(json)
