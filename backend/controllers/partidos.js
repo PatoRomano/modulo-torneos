@@ -1,3 +1,4 @@
+const { sequelize } = require('../config/mysql');
 const { Partido } = require('../models');
 
 /** 
@@ -7,9 +8,24 @@ const { Partido } = require('../models');
 */
 const getItems = async (req, res) => {
 
-    const partidos = await Partido.findAll({});
+    try {
+        const query = `SELECT p.id AS id, t.nombre AS torneo, eq1.nombre AS equipoUno, eq2.nombre AS equipoDos, 
+        em.nombre_publico AS instancia, p.goles_equipo_uno AS goles_equipo_uno, p.goles_equipo_dos AS goles_equipo_dos, 
+        p.fecha AS fecha, p.activo AS activo
+        FROM partidos AS p 
+        INNER JOIN torneos AS t ON p.torneo_id = t.id 
+        INNER JOIN equipos AS eq1 ON p.equipo_uno_id = eq1.id
+        INNER JOIN equipos AS eq2 ON p.equipo_dos_id = eq2.id
+        INNER JOIN emparejamientos AS em ON p.llave_id = em.id
+        ORDER BY p.llave_id ASC`;
+        //const query = 'SELECT * FROM torneos'
+        const partidos = await sequelize.query(query, { type: sequelize.QueryTypes.SELECT });
 
-    res.send({ partidos });
+        res.send({ partidos });
+        console.log(partidos)
+    } catch (error) {
+        res.status(500).send({ error });
+    }
 
 }
 

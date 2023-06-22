@@ -17,7 +17,7 @@ const Torneo = ({}) => {
     const [partidos, setPartidos] = useState([])
     const [partidosFiltrados, setPartidosFiltrados] = useState([])
 
-    // TRAER LOS DEPORTES
+    // TRAER LOS PARTIDOS
     const fetchPartidos = async () => {
         const response = await fetch('http://localhost:3001/api/partidos/')
         const json = await response.json()
@@ -29,15 +29,27 @@ const Torneo = ({}) => {
         }
     }
 
+    const [torneo, setTorneo] = useState([])
+
+    // TRAER UN TORNEO
+    const fetchTorneo = async () => {
+        const response = await fetch(`http://localhost:3001/api/torneos/${id}`)
+        const json = await response.json()
+        if (response.ok) {
+            setTorneo(json.torneo)
+        }
+    }
+
     useEffect(() => {
         fetchPartidos();
+        fetchTorneo();
     }, [])
 
 
     return (
         <div>
             <ButtonBack onClick={() => history(-1)} />
-            <MainTitle title={`Partidos del torneo ${id}`} />
+            <MainTitle title={`Partidos del torneo ${torneo.nombre}`} />
             <div className="tabla-btn-container">
                 <div className="tabla-container">
                     <table className="tabla">
@@ -59,13 +71,13 @@ const Torneo = ({}) => {
                                             {fila.id}
                                         </td>
                                         <td>
-                                            {fila.llave_id}
+                                            {fila.instancia}
                                         </td>
                                         <td>
-                                            {fila.equipo_uno_id}
+                                            {fila.equipoUno}
                                         </td>
                                         <td>
-                                            {fila.equipo_dos_id}
+                                            {fila.equipoDos}
                                         </td>
                                         <td>
                                             {fila.goles_equipo_uno? fila.goles_equipo_uno : "Aun no se jugo"}
