@@ -65,8 +65,8 @@ const Sedes = () => {
             <MainTitle title="Elige tu sede!" />
 
             {sedes && Array.isArray(sedes) && sedes.map((sede) => (
-                <Link to={"/canchas"} onClick={() => handleClick(sede.nombre, sede.nombre_publico)} className='card-link'>
-                    <Card key={sede.id} title={sede.nombre} imageSrc={ImageVasXMas} />
+                <Link to={"/canchas"} onClick={() => handleClick(sede.id, sede.nombre)} className='card-link'>
+                    <Card key={sede.id} title={sede.nombre} imageSrc={ImageCanchita} />
                 </Link>
             ))}
 

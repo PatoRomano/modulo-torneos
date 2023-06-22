@@ -1,4 +1,4 @@
-import { React, useContext, useEffect } from 'react';
+import { React, useContext, useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
 
@@ -14,13 +14,14 @@ import ImageFairPlay from '../assets/sedes/fairplay.jpg';
 
 const Canchas = () => {
     const { jsonData, updateJsonData } = useContext(DataContext);
-    const handleClick = (elem) => {
-        const newData = { 
-            deporte: jsonData.deporte, 
-            deporte_id: jsonData.deporte_id, 
-            sede: jsonData.sede, 
-            nombreSede: jsonData.nombreSede, 
-            cancha: elem 
+    const handleClick = (elem, elem2) => {
+        const newData = {
+            deporte: jsonData.deporte,
+            deporte_id: jsonData.deporte_id,
+            sede: jsonData.sede,
+            nombreSede: jsonData.nombreSede,
+            cancha: elem,
+            cancha_id: elem2,
         };
         updateJsonData(newData);
     };
@@ -28,28 +29,34 @@ const Canchas = () => {
     // NAVIGATE PARA BOTON VOLVER ATRAS
     const history = useNavigate()
 
-    const canchas = [
-        { id: 1, nombre: 'futbolcinco', nombre_publico: "Futbol 5", activo: 1 },
-        { id: 2, nombre: 'futbolsiete', nombre_publico: "Futbol 7", activo: 1 },
-    ];
-    /* 
-        const fetchDeportes = async () => {
-            const response = await fetch('http://localhost:3001/api/deportes/')
-            const json = await response.json()
-            if (response.ok) {
-                setDeportes(json.deportes)
-            }
-        } 
-    */
+    /*     const canchas = [
+            { id: 1, nombre: 'futbolcinco', nombre_publico: "Futbol 5", activo: 1 },
+            { id: 2, nombre: 'futbolsiete', nombre_publico: "Futbol 7", activo: 1 },
+        ]; */
 
-    /*     useEffect(() => {
-            fetchDeportes();
-        }, []) 
-    */
-
+    const [canchas, setCanchas] = useState([]);
+    const fetchCanchas = async () => {
+        try {
+            const response = await fetch('http://192.168.149.239:3000/canchas/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id_espacio: jsonData.sede })
+            });
+            const json = await response.json();
+            setCanchas(json);
+            console.log(json)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     useEffect(() => {
-        console.log(jsonData)
+        console.log(jsonData);
+        fetchCanchas();
     }, [])
+
+
 
 
     return (
@@ -58,8 +65,8 @@ const Canchas = () => {
             <MainTitle title="Elige el tipo de cancha" />
 
             {canchas && Array.isArray(canchas) && canchas.map((cancha) => (
-                <Link to={"/espacios"} onClick={() => handleClick(cancha.nombre)} className='card-link'>
-                    <Card key={cancha.id} title={cancha.nombre_publico} imageSrc={ImageFairPlay} />
+                <Link to={"/espacios"} onClick={() => handleClick(cancha.nombre, cancha.id)} className='card-link'>
+                    <Card key={cancha.id} title={cancha.nombre} imageSrc={ImageFairPlay} />
                 </Link>
             ))}
 
