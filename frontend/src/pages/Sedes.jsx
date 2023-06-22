@@ -31,25 +31,28 @@ const Sedes = () => {
 
     useEffect(() => {
         console.log(jsonData)
-        //fetchSedes();
+        fetchSedes();
     }, [])
 
-/*     const [sedes, setSedes] = useState([]);
+    const [sedes, setSedes] = useState([]);
     const fetchSedes = async () => {
-        const response = await fetch('http://localhost:3001/api/sedes/')
-        const json = await response.json()
-        if (response.ok) {
-            setSedes(json.sedes)
+        try {
+            const response = await fetch('http://192.168.149.239:3000/empresasFutbol/')
+            const json = await response.json();
+            console.log(json);
+            setSedes(json)
+        } catch (error) {
+            console.log(error);
         }
-    } */
+    }
 
 
     //SEDES
-    const sedes = [
-        { id: 1, nombre: 'vasxmas', nombre_publico: "Vas x Mas", activo: 1 },
-        { id: 2, nombre: 'lacanchita', nombre_publico: "La Canchita", activo: 1 },
-        { id: 3, nombre: 'fairplay', nombre_publico: "Fair Play", activo: 1 },
-    ];
+    /*     const sedes = [
+            { id: 1, nombre: 'vasxmas', nombre_publico: "Vas x Mas", activo: 1 },
+            { id: 2, nombre: 'lacanchita', nombre_publico: "La Canchita", activo: 1 },
+            { id: 3, nombre: 'fairplay', nombre_publico: "Fair Play", activo: 1 },
+        ]; */
 
 
     //use Params
@@ -63,7 +66,7 @@ const Sedes = () => {
 
             {sedes && Array.isArray(sedes) && sedes.map((sede) => (
                 <Link to={"/canchas"} onClick={() => handleClick(sede.nombre, sede.nombre_publico)} className='card-link'>
-                    <Card key={sede.id} title={sede.nombre_publico} imageSrc={sede.nombre === "vasxmas" ? ImageVasXMas : sede.nombre === "lacanchita" ? ImageCanchita : ImageFairPlay} />
+                    <Card key={sede.id} title={sede.nombre} imageSrc={ImageVasXMas} />
                 </Link>
             ))}
 
