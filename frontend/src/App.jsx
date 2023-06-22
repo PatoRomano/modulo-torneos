@@ -27,7 +27,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Navbar />
-        <Hero imageSrc={imgBg} title="Crea torneos de cualquier deporte." />
+        <Hero imageSrc={imgBg} title="Crea torneos donde estés." />
         <Routes>
           <Route
             path="/"

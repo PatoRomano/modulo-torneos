@@ -46,3 +46,52 @@
     color: #ffffff;
     font-weight: bold;
 }
+
+.navbar-toggle {
+    display: none;
+}
+
+.navbar-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 32px;
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .navbar-list {
+        display: none;
+    }
+
+    .navbar-menu.open {
+        background-color: #333333;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .navbar-menu.open .navbar-list {
+        display: block;
+    }
+
+    .navbar-toggle {
+        margin-right: 2rem;
+        display: block;
+        font-size: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navbar-menu.open .navbar-toggle {
+        color: white;
+    }
+}

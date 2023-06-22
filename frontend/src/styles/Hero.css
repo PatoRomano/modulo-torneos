@@ -26,3 +26,47 @@
     margin-top: auto;
     margin-left: 0;
 }
+
+@media (max-width: 1024px) {
+    .title {
+        color: #ffffff;
+        font-size: 58px;
+        text-align: left;
+        width: 50%;
+        margin-top: auto;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        color: #ffffff;
+        font-size: 52px;
+        text-align: left;
+        width: 50%;
+        margin-top: auto;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        color: #ffffff;
+        font-size: 42px;
+        text-align: left;
+        width: 50%;
+        margin-top: auto;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 320px) {
+    .title {
+        color: #ffffff;
+        font-size: 36px;
+        text-align: left;
+        width: 50%;
+        margin-top: auto;
+        margin-left: 0;
+    }
+}
